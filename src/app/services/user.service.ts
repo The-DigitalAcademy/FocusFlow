@@ -11,7 +11,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   //accessing the endpoints
-  private url = 'localhost:3000/users'
+  private url = 'http://localhost:3000/users'
   //register user
   register(user: Users): Observable<Users>{
     const registerUser: Users = {
