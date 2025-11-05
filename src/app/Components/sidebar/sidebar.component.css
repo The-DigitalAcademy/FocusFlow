@@ -29,3 +29,22 @@ li {
 h3 {
     font-size: 1.8rem;
 }
+
+
+.moon-icon,
+.signout-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle; /* aligns the image with text */
+}
+
+
+.dark-mode, .sign-out {
+    display: flex;
+    align-items: center;  /* vertically center icon & text */
+    gap: 12px;            /* space between icon and text */
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+}
