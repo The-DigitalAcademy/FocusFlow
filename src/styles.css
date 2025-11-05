@@ -1,4 +1,15 @@
 :root {
     --header-font: "Chewy", system-ui;
     --body-font: "Zalando Sans", sans-serif;
+    --main-blue-color: #EEFEFC;
+    --main-pink-color: #FFBDBD;
+    --dark-pink-color: #FFA4A4;
+    --add-button-color: #D6FFDB;
+    --remove-button-color: #FFC2B5;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
