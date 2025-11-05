@@ -1,1 +1,28 @@
-<p>list-detail works!</p>
+<div class="list-main">
+    <div class="list-div-main-header">
+        <h1 class="list-header">List Name</h1>
+    </div>
+   
+    <div class="add-task-div">
+        <button class="add-task-button">Add Task</button>
+    </div>
+<!-- Div for everything in the list-->
+    <div class="task-div" *ngIf="items.length > 0; else noTasks">
+        
+        <!-- Div for each task-->
+        <div class="task" *ngFor="let item of items; let i = index; else noTasks"> 
+            <div class="task-header-div">
+                <h1 class="task-header">{{items[i]}}</h1>
+            </div>
+            <div class="task-settings">
+                <p>Edit</p>
+                <p>Delete</p>
+            </div>
+        </div>
+
+    </div>
+
+    <ng-template #noTasks>
+        <p class="no-tasks-message">No tasks available. Please add a task.</p>
+    </ng-template>
+</div>
