@@ -10,7 +10,7 @@
     <div class="task-div" *ngIf="items.length > 0; else noTasks">
         
         <!-- Div for each task-->
-        <div class="task" *ngFor="let item of items; let i = index; else noTasks"> 
+        <div class="task" *ngFor="let item of items; let i = index;"> 
             <div class="task-header-div">
                 <h1 class="task-header">{{items[i]}}</h1>
             </div>
