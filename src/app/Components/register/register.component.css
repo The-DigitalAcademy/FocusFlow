@@ -1,0 +1,55 @@
+:root {
+    --header-font: "Chewy", system-ui;
+    --body-font: "Zalando Sans", sans-serif;
+    --main-blue-color: #EEFEFC;
+    --main-pink-color: #FFBDBD;
+    --dark-pink-color: #FFA4A4;
+    --add-button-color: #D6FFDB;
+    --remove-button-color: #FFC2B5;
+    --box-shadow-color: rgba(0,0,0,0.1);
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-blue-color);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow-color);
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.h2 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    font-size: large;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+}
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+button {
+    width: 100px;
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    background-color: var(--main-pink-color);
+    border: 1px solid black;
+    border-radius: 6px;
+    font-weight: bold;
+}
