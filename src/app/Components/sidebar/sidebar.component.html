@@ -3,18 +3,18 @@
     <div class="top-sidebar">
     <h3><span class="menu-icon">☰</span> Lists</h3>
     <ul>
-        <li>Personal</li>
-        <li>Work</li>
-        <li>Shopping</li>
+        <li (click)="filter('Personal')">Personal</li>
+        <li (click)="filter('Work')">Work</li>
+        <li (click)="filter('Shopping')">Shopping</li>
     </ul>
 </div>
     <div class="bottom-section">
-         <h5 class="dark-mode">
+         <h5 (click)="toggleDark()" class="dark-mode">
             <img src="assets/line-md_moon-filled.svg" alt="Moon Icon" class="moon-icon">
             Dark mode
         </h5>
         <br>
-        <h5 class="sign-out">
+        <h5 (click)="logout()" class="sign-out">
             <img src="assets/uil_signout.svg" alt="Sign Out Icon" class="signout-icon">
             Sign Out
         </h5>
