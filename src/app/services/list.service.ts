@@ -40,8 +40,8 @@ export class ListService {
   }
 
   //get all lists
-  getAll(): Observable<Lists>{
-    return this.httpClient.get<Lists>(this.url);
+  getAll(): Observable<Lists[]>{
+    return this.httpClient.get<Lists[]>(this.url);
   }
 
   //delete list
