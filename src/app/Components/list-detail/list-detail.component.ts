@@ -6,12 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-detail.component.css']
 })
 export class ListDetailComponent {
-  items: Array<any> = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5"
+  tasks: Array<any> = [
+    {title: "Item 1", id: 1},
+    {title: "Item 2", id: 2},
+    {title: "Item 3", id: 3}
   ];
+
+  editTask ( id: number) {
+    console.log("Editing task with id:", id);
+  }
 
 }

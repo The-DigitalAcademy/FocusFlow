@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingPageComponent},
   { path: 'home', component: HomeComponent},
   { path: 'list-tasks', component: ListTasksComponent},
-  { path: 'add-task/:id', component: AddTaskComponent},
+  { path: 'add-task', component: AddTaskComponent},
   { path: 'add-list', component: AddListComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},

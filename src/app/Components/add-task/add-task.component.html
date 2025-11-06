@@ -1,1 +1,27 @@
-<p>add-task works!</p>
+<div class="add-task-div">
+    <div class="overlay">
+
+        <div class="modal">
+            <form class="modal-form">
+                <div class="task-div"> 
+                    <label for="task" class="task-label">Task:</label>
+                <input type="text" placeholder="eg. Wash the dishes" name="task" />
+                </div>
+                <div class="due-div">
+                    <label for="due" class="due-label">Due Date:</label>
+                    <input type="date" placeholder="Task Name" name="due" />
+                </div>
+               <select>
+                    <option value="" disabled selected>Choose Importance</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </form>
+            <div class="modal-buttons">
+                <button class="add-button">Add</button>
+                <button class="cancel-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
