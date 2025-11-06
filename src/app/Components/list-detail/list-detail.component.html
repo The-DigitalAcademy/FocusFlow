@@ -4,7 +4,7 @@
     </div>
    
     <div class="add-task-div">
-        <button class="add-task-button">Add New Task</button>
+        <button class="add-task-button" (click)="addTask()">Add New Task</button>
     </div>
 <!-- Div for everything in the list-->
     <div class="task-div" *ngIf="tasks.length > 0; else noTasks">
@@ -15,12 +15,14 @@
                 <h1 class="task-header">{{task.title}}</h1>
             </div>
             <div class="task-settings">
-            <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" routerLink="/add-task" >
+            <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" (click)="editTask(task.id)">
             <img src="../../../assets/material-symbols_delete.svg" class="delete-button">
             </div> 
         </div>
 
     </div>
+     <app-add-task *ngIf="showModal" [isVisible]="showModal" (close)="onClose()"></app-add-task>
+ 
 
     <ng-template #noTasks>
         <p class="no-tasks-message">No tasks available. Please add a task.</p>

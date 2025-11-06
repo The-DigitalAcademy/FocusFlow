@@ -12,8 +12,20 @@ export class ListDetailComponent {
     {title: "Item 3", id: 3}
   ];
 
+  selectedTaskId: number | null = null;
+   showModal = false
+
+  addTask() {
+    this.showModal = true;
+  }
+
   editTask ( id: number) {
-    console.log("Editing task with id:", id);
+    this.selectedTaskId = id;
+    this.showModal = true;
+  }
+
+  onClose() {
+  this.showModal = false;
   }
 
 }
