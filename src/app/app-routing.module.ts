@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'add-list', component: AddListComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'list-detail', component: ListDetailComponent},
+  { path: 'list-detail/:id', component: ListDetailComponent},
   { path: 'sidebar', component: SidebarComponent}
 ];
 

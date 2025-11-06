@@ -36,7 +36,7 @@ export class ListService {
 
   //get a single list
   getSingleList(id: number): Observable<Lists>{
-    return this.httpClient.get<Lists>(`${this.url}/id=${id}`);
+    return this.httpClient.get<Lists>(`${this.url}/${id}`);
   }
 
   //get all lists
@@ -46,6 +46,6 @@ export class ListService {
 
   //delete list
   deleteList(id: number): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}/id=${id}`);
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 }

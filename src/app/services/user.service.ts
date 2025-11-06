@@ -40,7 +40,7 @@ export class UserService {
 
   //Delete user?
   deleteUser(id: number): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}/id=${id}`);
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
   
   //Edit user?

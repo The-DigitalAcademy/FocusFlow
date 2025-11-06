@@ -45,11 +45,7 @@ export class HomeComponent {
   ];
 
   navigateToDetail(index: number) {
-    if (this.boxes[index].showPlus) {
-      this.router.navigate(['/add-list']);
-    } else {
-      this.router.navigate(['/list-detail', index]);
-    }
+    this.router.navigate(['/list-detail', index]);
   }
 
   
