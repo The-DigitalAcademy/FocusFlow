@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { validateLocaleAndSetLanguage } from 'typescript';
 
 @Component({
   selector: 'app-register',
@@ -7,17 +8,20 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  registerForm = new FormGroup ({
-    name: new FormControl(''),
-    surname: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl('')
-  });
   
+  registerForm: FormGroup;
+
+  constructor() {
+    this.registerForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      surname: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
+    });
+  }
   onSubmit() {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value);
-      // alert('Registration Successful');
     }
   }
 
