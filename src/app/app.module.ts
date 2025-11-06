@@ -41,4 +41,5 @@ import { LandingPageComponent } from './Components/landing-page/landing-page.com
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}
