@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TaskService } from 'src/app/services/task.service';
+import { Tasks } from 'src/app/models/Tasks';
 
 @Component({
   selector: 'app-list-detail',
@@ -6,13 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-detail.component.css']
 })
 export class ListDetailComponent {
-  tasks: Array<any> = [
-    {title: "Item 1", id: 1},
-    {title: "Item 2", id: 2},
-    {title: "Item 3", id: 3}
-  ];
+   constructor( private taskService : TaskService) {}
+    tasks: Tasks[] = [];
+  
+    ngOnInit(): void {
+      this.taskService.getAllTasks().subscribe((data: Tasks[]) => {
+        this.tasks = data;
+      })}
+  
 
-  selectedTaskId: number | null = null;
+   selectedTaskId: number | null = null;
    showModal = false
 
   addTask() {

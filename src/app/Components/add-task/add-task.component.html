@@ -2,18 +2,18 @@
     <div class="overlay">
 
         <div class="modal">
-            <form class="modal-form">
+            <form class="modal-form" #taskForm="ngForm">
                 <div class="task-div"> 
                     <label for="task" class="task-label">Task:</label>
-                <input type="text" placeholder="eg. Wash the dishes" name="task" />
+                <input type="text" placeholder="eg. Wash the dishes" name="task" [(ngModel)]="taskTitle"required/>
                 </div>
                 <div class="due-div">
                     <label for="due" class="due-label">Due Date:</label>
-                    <input type="date" placeholder="Task Name" name="due" />
+                    <input type="date" placeholder="Task Name" name="due" id="due" [(ngModel)]="taskDueDate"/>
                 </div>
              <div class="select-div">
               <label for="priority" class="priority-label">Priority:</label>
-               <select>
+               <select required [(ngModel)]="taskPriority" name="priority" id="priority">
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
@@ -21,7 +21,7 @@
              </div>   
             </form>
             <div class="modal-buttons">
-                <button class="add-button" (click)="addTask()">Add</button>
+                <button class="add-button" (click)="addTask()" type="submit">Add</button>
                 <button class="cancel-button" (click)="onClose()">Cancel</button>
             </div>
         </div>

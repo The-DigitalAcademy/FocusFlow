@@ -10,7 +10,7 @@
 }
 
 .overlay {
-    position: fixed;
+     position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -60,10 +60,13 @@ input, select {
     padding: 10px;
     background-color: var(--main-blue-color);
     border-style: none;
-    color: #00000042;
 }
 
 input::placeholder {
+    color: #00000042;
+}
+
+select, #due {
     color: #00000042;
 }
 label {
