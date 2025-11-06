@@ -47,6 +47,7 @@ h3 {
     font-size: 1.8rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .menu-icon {
@@ -75,5 +76,5 @@ h3 {
 .dark-mode:hover, .sign-out:hover {
     text-decoration: underline;
     font-size: 1.3rem;
-     transition: all 0.2s ease; 
+    transition: all 0.2s ease; 
 }

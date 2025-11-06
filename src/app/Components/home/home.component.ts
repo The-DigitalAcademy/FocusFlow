@@ -4,6 +4,8 @@ import { Lists } from 'src/app/models/Lists';
 import { FilterService } from 'src/app/services/filter.service';
 import { ListService } from 'src/app/services/list.service';
 import { TaskService } from 'src/app/services/task.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -32,5 +34,22 @@ export class HomeComponent {
       next: (response: Lists[]) => this.list.set(response),
       error: (err) => console.log('Error loading lists: ', err)
     })
+  boxes = [
+    { name:'List 1', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
+    { name:'List 2', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
+    { name:'List 3', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
+    { name:'List 4', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]},
+    { showPlus: true },
+    
+  ];
+
+  constructor(private router: Router) { }
+  navigateToDetail(index: number) {
+    if (this.boxes[index].showPlus) {
+      this.router.navigate(['/add-list']);
+    } else {
+      this.router.navigate(['/list-detail', index]);
+    }
+
   }
 }
