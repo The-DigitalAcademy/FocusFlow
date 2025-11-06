@@ -13,4 +13,10 @@ export class AddTaskComponent {
     this.close.emit();
     this.isVisible = false;
   }
+
+  addTask() {
+    alert('Task Adde Successfully!');
+    this.close.emit();
+    this.isVisible = false;
+}
 }
