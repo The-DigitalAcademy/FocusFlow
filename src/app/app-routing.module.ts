@@ -8,6 +8,7 @@ import { AddListComponent } from './Components/add-list/add-list.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { ListDetailComponent } from './Components/list-detail/list-detail.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'list-detail/:id', component: ListDetailComponent},
+  { path: 'sidebar', component: SidebarComponent}
 ];
 
 @NgModule({
