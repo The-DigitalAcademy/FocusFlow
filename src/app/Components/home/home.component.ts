@@ -20,7 +20,7 @@ export class HomeComponent {
     private filterService: FilterService,
     private taskService: TaskService,
     private listService: ListService,
-    private router: Router
+    public router: Router
   ){}
 
   filteredItems = computed(() => {
@@ -51,5 +51,7 @@ export class HomeComponent {
       this.router.navigate(['/list-detail', index]);
     }
   }
+
+  
 }
 

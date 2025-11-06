@@ -57,7 +57,52 @@ root {
 .list-info li {
     font-size: 14px;
 }
+.task-count {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 12px;
+}
 
+.task-preview {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.task-preview li {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 6px;
+  padding-left: 20px;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.task-preview li::before {
+  content: "•";
+  color: #ff69b4;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.task-preview li.done {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.task-preview li.done::before {
+  content: "✓";
+  color: #4caf50;
+}
+
+.more-tasks {
+  color: #999;
+  font-style: italic;
+  font-size: 0.8rem;
+}
 .add-icon {
     width: 50px;
     height: 50px; 

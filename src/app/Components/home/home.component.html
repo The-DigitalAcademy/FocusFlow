@@ -1,15 +1,30 @@
 <div class="list-container">
     <h2>Lists</h2>
     <div class="lists-grid">
-        <div class="list-box" *ngFor="let box of boxes; let i = index" (click)="navigateToDetail(i)">
+        <div 
+            class="list-box" 
+            *ngFor="let eachList of list(); let i = index" 
+            (click)="navigateToDetail(eachList.id)"
+            >
             <div class="list-info">
-            <h1>{{box.name}}</h1>
-            <ul>
-                <li *ngFor="let task of box.tasks">{{task.title}}</li>
-            </ul>
-            <a *ngIf="box.showPlus" [routerLink]="['/add-list']">
-                <img src="assets/material-symbols_add.svg" alt="Add" class="add-icon">
-            </a>
+                <h3>{{ eachList.name }}</h3>
+                <p class="task-count">{{ eachList.tasksID.length }} task{{ eachList.tasksID.length !== 1 ? 's' : '' }}</p>
+
+                <ul class="task-preview">
+                <li *ngFor="let task of eachList.tasksID | slice:0:3">
+                    <span [class.done]="task.isDone"></span>
+                    {{ task.name }}
+                </li>
+                <li *ngIf="eachList.tasksID.length > 3" class="more-tasks">
+                    +{{ eachList.tasksID.length - 3 }} more...
+                </li>
+                </ul>
+            </div>
+        </div>
+        <div class="list-box add-new" (click)="router.navigate(['/add-list'])">
+            <div class="list-info plus">
+                <span class="plus-icon">+</span>
+                <p>Add another list</p>
             </div>
         </div>
     </div>
