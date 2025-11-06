@@ -13,20 +13,20 @@
     height: 95vh;
     background-color: var(--main-blue-color);
     padding: 20px;
-    border-radius: 20px; /* curved corners */
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1); /* soft shadow */
+    border-radius: 20px; 
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1); 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 20px; /* spacing from edges */
-    position: relative; 
+    margin: 20px; 
     font-family: var(--body-font);
     transition: all 0.3s ease; 
+    position: fixed;
 }
 
 ul {
-    list-style: disc;   /* bullet points */
-    padding-left: 20px; /* space from left edge */
+    list-style: disc;   
+    padding-left: 20px; 
     margin-top: 50px;
 }
 
@@ -57,14 +57,14 @@ h3 {
 .signout-icon {
     width: 18px;
     height: 18px;
-    vertical-align: middle; /* aligns the image with text */
+    vertical-align: middle; 
 }
 
 
 .dark-mode, .sign-out {
     display: flex;
-    align-items: center;  /* vertically center icon & text */
-    gap: 12px;            /* space between icon and text */
+    align-items: center;  
+    gap: 12px;            
     cursor: pointer;
     font-weight: 500;
     font-size: 16px;
@@ -75,4 +75,5 @@ h3 {
 .dark-mode:hover, .sign-out:hover {
     text-decoration: underline;
     font-size: 1.3rem;
+     transition: all 0.2s ease; 
 }

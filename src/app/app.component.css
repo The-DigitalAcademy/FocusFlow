@@ -1,0 +1,9 @@
+.main-content {
+  display: flex;
+  height: 100vh;
+}
+
+router-outlet {
+  margin-left: 350px; /* create space for sidebar */
+  display: block;
+}
