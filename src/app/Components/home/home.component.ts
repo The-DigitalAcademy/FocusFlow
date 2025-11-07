@@ -31,18 +31,13 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.listService.getAll().subscribe({
-      next: (response: Lists[]) => this.list.set(response),
+      next: (response: Lists[]) => {
+        this.list.set(response);
+        console.log(this.list())
+      },
       error: (err) => console.log('Error loading lists: ', err)
     })
   }
-  boxes = [
-    { name:'List 1', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
-    { name:'List 2', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
-    { name:'List 3', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
-    { name:'List 4', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]},
-    { showPlus: true },
-    
-  ];
 
   navigateToDetail(index: number) {
     this.router.navigate(['/list-detail', index]);
