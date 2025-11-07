@@ -57,4 +57,14 @@ export class ListDetailComponent {
   this.showModal = false;
   }
 
+  deleteTask(id: number) {
+    console.log('Deleting task with ID:', id);
+    this.taskService.deleteTask(id).subscribe({
+      next: () => {
+        // Remove the deleted task from the tasks array
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      }
+    });
+}
+
 }
