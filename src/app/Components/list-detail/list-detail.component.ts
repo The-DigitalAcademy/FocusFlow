@@ -48,6 +48,7 @@ export class ListDetailComponent {
    showModal = false
    addTaskArr = this.tasks
    selectedTaskIsDone: boolean = false
+   showEditModal = false
 
   addTask() {
     this.showModal = true;
@@ -56,7 +57,7 @@ export class ListDetailComponent {
   editTask ( id: number, isDone: boolean) {
     this.selectedTaskId = id;
     this.selectedTaskIsDone = isDone
-    this.showModal = true;
+    this.showEditModal = true;
 
   }
 
@@ -71,6 +72,7 @@ export class ListDetailComponent {
 
 onClose() {
   this.showModal = false;
+  this.showEditModal = false;
   }
 
 isComplete(index: number) {

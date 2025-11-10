@@ -22,7 +22,7 @@
 
     </div>
      <app-add-task *ngIf="showModal" [isVisible]="showModal" (close)="onClose()" [editTaskId]="selectedTaskId" [addTaskArr]="addTaskArr" [done]="selectedTaskIsDone"></app-add-task>
- 
+     <app-edit-task *ngIf="showEditModal" [isVisible]="showEditModal" (closeEdit)="onClose()" [editTaskId]="selectedTaskId" [addTaskArr]="addTaskArr" [done]="selectedTaskIsDone"></app-edit-task>
 
     <ng-template #noTasks>
         <p class="no-tasks-message">No tasks available. Please add a task.</p>

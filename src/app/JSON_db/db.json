@@ -287,13 +287,6 @@
   ],
   "tasks": [
     {
-      "id": "1",
-      "name": "Wake up at 6 AM",
-      "dueDate": "05-11-25",
-      "importance": "Very",
-      "isDone": true
-    },
-    {
       "id": "2",
       "name": "Drink 2L water",
       "dueDate": "05-11-25",
@@ -718,6 +711,27 @@
       "name": "Wash the dishes ",
       "dueDate": "2025-11-10",
       "importance": "low",
+      "isDone": false
+    },
+    {
+      "id": 1,
+      "name": "",
+      "dueDate": "",
+      "importance": "",
+      "isDone": false
+    },
+    {
+      "id": 1,
+      "name": "Wash the dishes ",
+      "dueDate": "",
+      "importance": "",
+      "isDone": false
+    },
+    {
+      "id": 1,
+      "name": "cook lunch",
+      "dueDate": "2025-11-10",
+      "importance": "medium",
       "isDone": false
     }
   ]

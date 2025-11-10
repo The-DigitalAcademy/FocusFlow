@@ -25,6 +25,8 @@ export class AddTaskComponent {
   @Input() addTaskArr: Tasks[] = []
   @Output() addTaskArrChange = new EventEmitter<Tasks[]>();
 
+  @Input() done: boolean = false 
+
   constructor(
     private taskService: TaskService,
   ) { }
@@ -48,6 +50,7 @@ export class AddTaskComponent {
   onClose() {
     this.close.emit();
     this.isVisible = false;
+    
   }
 
   addTask() {
@@ -79,10 +82,26 @@ export class AddTaskComponent {
   }
 
   editTask() {
-     
+     const updateTask = {
+      id: Number(this.editTaskId),
+      name: this.taskTitle,
+      dueDate: this.taskDueDate,
+      importance: this.taskPriority,
+      isDone: this.done
+     }
+
+     this.taskService.updateTask(updateTask).subscribe({
+      next: (editTask) => {
+        const index = this.addTaskArr.findIndex(t => t.id === editTask.id);
+        if (index !== -1) {
+        this.addTaskArr[index] = editTask;
+      }
+       this.addTaskArrChange.emit(this.addTaskArr);
+        // Tells the parent to close the model 
+        this.close.emit();
+        console.log(this.addTaskArr);
+      }
+     })
   }
 
-  showInputValues() {
-    this.editTaskId
-  }
 }
