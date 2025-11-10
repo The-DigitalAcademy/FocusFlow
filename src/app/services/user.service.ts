@@ -13,18 +13,13 @@ export class UserService {
   //accessing the endpoints
   private url = 'http://localhost:3000/users'
   //register user
-  register(user: Users): Observable<Users>{
-    const registerUser: Users = {
-      ...user,
-      id: 1     
-    };
-
-    return this.httpClient.post<Users>(this.url, registerUser);
+  register(user: Omit<Users, "id">): Observable<Users>{
+    return this.httpClient.post<Users>(this.url, user);
   }
 
   //Login
   login(email: string, pass: string): Observable<Users>{
-    return this.httpClient.get<Users>(`${this.url}/email=${email}&password=${pass}`);
+    return this.httpClient.get<Users>(`${this.url}?email=${email}&password=${pass}`);
   }
 
   //get current user
@@ -40,7 +35,7 @@ export class UserService {
 
   //Delete user?
   deleteUser(id: number): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}/${id}`);
+    return this.httpClient.delete<void>(`${this.url}?id=${id}`);
   }
   
   //Edit user?

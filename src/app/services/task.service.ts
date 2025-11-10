@@ -19,7 +19,7 @@ export class TaskService {
 
   //get a single task
   getTaskById(id: number): Observable<Tasks>{
-    return this.httpClient.get<Tasks>(`${this.url}/${id}`);
+    return this.httpClient.get<Tasks>(`${this.url}?email=${id}`);
   };
 
   //get all tasks
@@ -34,6 +34,6 @@ export class TaskService {
 
   //Delete task
   deleteTask(id: number): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}/${id}`);
+    return this.httpClient.delete<void>(`${this.url}?email=${id}`);
   }
 }

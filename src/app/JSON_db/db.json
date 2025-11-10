@@ -122,6 +122,13 @@
       "surname": "mosia",
       "email": "nkelemosia@gmail.com",
       "password": "083hrk"
+    },
+    {
+      "id": "fd06",
+      "name": "name",
+      "surname": "surname",
+      "email": "name@example.com",
+      "password": "pass"
     }
   ],
   "lists": [
