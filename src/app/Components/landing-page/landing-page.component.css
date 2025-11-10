@@ -1,0 +1,52 @@
+:root {
+    --header-font: "Chewy", system-ui;
+    --body-font: "Zalando Sans", sans-serif;
+    --main-blue-color: #EEFEFC;
+    --main-pink-color: #FFBDBD;
+    --dark-pink-color: #FFA4A4;
+    --add-button-color: #D6FFDB;
+    --remove-button-color: #FFC2B5;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--dark-pink-color);
+    color: white;
+    padding: 30px 30px;
+}
+
+.navLink {
+    margin: 0 10px;
+    color: white;
+    font-weight: 500;
+}
+.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    border: 1px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font: var(--body-font);
+}
+
+.get-started-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--main-blue-color);
+    color: black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 30px;
+}
