@@ -22,14 +22,5 @@ export const userReducer = createReducer<UserState>(
 
     on(UserActions.logout, () => initialUserState),
 
-    on(UserActions.loadUserFromStorage, (state, {type}) => {
-        const saved = localStorage.getItem('current_user');
-        if(saved){
-            return {
-                ...state,
-                currentUser: JSON.parse(saved)
-            };
-        }
-        return state;
-    })
+    on(UserActions.loadUserFromStorage, (state) => state)
 );

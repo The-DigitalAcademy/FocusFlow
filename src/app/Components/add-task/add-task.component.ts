@@ -10,7 +10,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class AddTaskComponent {
 
   tasks: Tasks[] = [];
-
+  newTask!: Omit<Tasks, "id">;
   @Input() isVisible: boolean = false;
   @Output() close = new EventEmitter<void>();
   @Input() editTaskId: number | null = null;
@@ -19,7 +19,9 @@ export class AddTaskComponent {
   taskDueDate: any = '';
   taskPriority: any = '';
   
-
+  constructor(
+    private taskService: TaskService
+  ){}
   onClose() {
     this.close.emit();
     this.isVisible = false;
@@ -29,7 +31,14 @@ export class AddTaskComponent {
     alert('Task Added Successfully!');
     this.close.emit();
     this.isVisible = false;
-    this.tasks.push({id: 1 , name: this.taskTitle, dueDate: this.taskDueDate, importance: this.taskPriority, isDone: false});
+    //this.tasks.push({id: 1 , name: this.taskTitle, dueDate: this.taskDueDate, importance: this.taskPriority, isDone: false});
+    this.newTask = {
+      name: this.taskTitle,
+      dueDate: this.taskDueDate,
+      importance: this.taskPriority,
+      isDone: false,
+    }
+    this.taskService.addTask(this.newTask);
     console.log(this.tasks);
 }
 

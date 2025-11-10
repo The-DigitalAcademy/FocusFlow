@@ -30,17 +30,21 @@ export class ListService {
   }
 
   //get a single list
-  getSingleList(id: number): Observable<Lists>{
+  getSingleList(id: string): Observable<Lists>{
     return this.httpClient.get<Lists>(`${this.url}?id=${id}`);
   }
 
+  //get user lists
+  getUserLists(userId: string): Observable<Lists[]>{
+    return this.httpClient.get<Lists[]>(`${this.url}?userId=${userId}`)
+  }
   //get all lists
   getAll(): Observable<Lists[]>{
     return this.httpClient.get<Lists[]>(this.url);
   }
 
   //delete list
-  deleteList(id: number): Observable<void>{
+  deleteList(id: string): Observable<void>{
     return this.httpClient.delete<void>(`${this.url}?id=${id}`);
   }
 }

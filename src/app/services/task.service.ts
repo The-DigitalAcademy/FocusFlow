@@ -13,13 +13,13 @@ export class TaskService {
   private url = 'http://localhost:3000/tasks';
   
   //add a task
-  addTask(newTask: Tasks): Observable<Tasks>{
+  addTask(newTask: Omit<Tasks, "id">): Observable<Tasks>{
     return this.httpClient.post<Tasks>(this.url, newTask);
   };
 
   //get a single task
-  getTaskById(id: number): Observable<Tasks>{
-    return this.httpClient.get<Tasks>(`${this.url}?email=${id}`);
+  getTaskById(id: string): Observable<Tasks>{
+    return this.httpClient.get<Tasks>(`${this.url}?id=${id}`);
   };
 
   //get all tasks
@@ -33,7 +33,7 @@ export class TaskService {
   }
 
   //Delete task
-  deleteTask(id: number): Observable<void>{
+  deleteTask(id: string): Observable<void>{
     return this.httpClient.delete<void>(`${this.url}?email=${id}`);
   }
 }

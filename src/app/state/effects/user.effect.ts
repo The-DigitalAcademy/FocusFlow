@@ -15,18 +15,27 @@ export class UserEffects{
 
     login = createEffect(() =>
         this.actions.pipe(
-            ofType(UserActions.login),
-            mergeMap(({email, password}) => 
-                this.userService.login(email, password).pipe(
-                    map(user => {
-                        localStorage.setItem('current_user', JSON.stringify(user));
-                        return UserActions.loginSuccess({user});
-                    }),
-                    catchError(error => 
-                        of(UserActions.loginFailure({error: error}))
-                    )
-                )
+        ofType(UserActions.login),
+        mergeMap(({ email, password }) =>
+            this.userService.login(email, password).pipe(
+            map(user => {
+                this.userService.setCurrentUser(user); // ← SAVE HERE
+                return UserActions.loginSuccess({ user });
+            }),
+            catchError(error => of(UserActions.loginFailure({ error: error.message })))
             )
         )
-    )
+        )
+    );
+
+    loadUserFromStorage = createEffect(() =>
+        this.actions.pipe(
+        ofType(UserActions.loadUserFromStorage),
+        map(() => {
+            const user = this.userService.getCurrentUser();
+            if (user) return UserActions.loginSuccess({ user });
+            return UserActions.logout();
+        })
+        )
+    );
 }

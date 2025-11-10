@@ -15,7 +15,7 @@ export const loadListsFailure = createAction(
 
 export const selectList = createAction(
     '[List Page] Select List',
-    props<{listId: number}>()
+    props<{listId: string}>()
 );
 
 export const setFilter = createAction(
