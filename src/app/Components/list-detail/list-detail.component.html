@@ -21,7 +21,7 @@
         </div>
 
     </div>
-     <app-add-task *ngIf="showModal" [isVisible]="showModal" (close)="onClose()" [editTaskId]="selectedTaskId"></app-add-task>
+     <app-add-task *ngIf="showModal" [isVisible]="showModal" (close)="onClose()" [editTaskId]="selectedTaskId" [addTaskArr]="addTaskArr"></app-add-task>
  
 
     <ng-template #noTasks>

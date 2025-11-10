@@ -8,17 +8,22 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-
-  tasks: Tasks[] = [];
-
-  @Input() isVisible: boolean = false;
-  @Output() close = new EventEmitter<void>();
-  @Input() editTaskId: number | null = null;
+// Has the new task data on it.
+  addedTasks: Tasks[] = [];
+  
+  constructor( 
+      private taskService : TaskService,
+     ) {}
 
   taskTitle: any = '';
   taskDueDate: any = '';
   taskPriority: any = '';
-  
+
+  @Input() isVisible: boolean = false;
+  @Output() close = new EventEmitter<void>();
+  @Input() editTaskId: number | null = null;
+  @Input() addTaskArr: Tasks[] = []
+
 
   onClose() {
     this.close.emit();
@@ -26,11 +31,30 @@ export class AddTaskComponent {
   }
 
   addTask() {
-    alert('Task Added Successfully!');
-    this.close.emit();
-    this.isVisible = false;
-    this.tasks.push({id: 1 , name: this.taskTitle, dueDate: this.taskDueDate, importance: this.taskPriority, isDone: false});
-    console.log(this.tasks);
+  const newTask = {
+    id: 1, 
+    name: this.taskTitle,
+    dueDate: this.taskDueDate,
+    importance: this.taskPriority,
+    isDone: false
+  };
+
+    this.taskService.addTask(newTask).subscribe({
+      next: (createdTask) => {
+      this.addTaskArr.push(createdTask);
+      alert('Task Added Successfully!');
+      // Tells the parent to close the model 
+      this.close.emit();
+    
+      console.log(this.addTaskArr);
+
+    },
+    error: (err) => {
+      console.error('Error adding task:', err);
+      alert('Failed to add task.');
+    }
+   })
+    
 }
 
 showInputValues() {

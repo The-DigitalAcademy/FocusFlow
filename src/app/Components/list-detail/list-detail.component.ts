@@ -16,25 +16,28 @@ export class ListDetailComponent {
     private listService: ListService
    ) {}
     tasks: Tasks[] = [];
-  listName: string = '';
+    listName: string = '';
+
     ngOnInit(): void {
       const paramListID = this.route.snapshot.paramMap.get('id');
       this.listService.getSingleList(Number(paramListID)).subscribe({
-        next: (response) => {
-          this.listName = response.name;
+        next: (list) => {
+          this.listName = list.name;
           //get the task array
-          const taskArray = response.tasksID;
-          console.log('Task IDs:', taskArray);
-          for(let id of taskArray){
+          const taskIDArray = list.tasksID;
+          console.log('Task IDs:', taskIDArray);
+          for(let id of taskIDArray){
             //fetch each task by its ID
             this.taskService.getTaskById(Number(id)).subscribe({
               next: (taskResponse) => {
+                // Adds the tasks from api to tasks array
                 this.tasks.push(taskResponse);
+                console.log("Tasks", this.tasks)
               },
               error: (err) => console.log('Error loading task: ', err)
             })
           }
-          console.log('List details:', response);
+          console.log('List details:', list);
         },
         error: (err) => console.log('Error loading list details: ', err)
       })
@@ -43,6 +46,7 @@ export class ListDetailComponent {
 
    selectedTaskId: number | null = null;
    showModal = false
+   addTaskArr = this.tasks
 
   addTask() {
     this.showModal = true;
@@ -51,14 +55,10 @@ export class ListDetailComponent {
   editTask ( id: number) {
     this.selectedTaskId = id;
     this.showModal = true;
+
   }
 
-  onClose() {
-  this.showModal = false;
-  }
-
-  deleteTask(id: number) {
-    console.log('Deleting task with ID:', id);
+   deleteTask(id: number) {
     this.taskService.deleteTask(id).subscribe({
       next: () => {
         // Remove the deleted task from the tasks array
@@ -66,5 +66,9 @@ export class ListDetailComponent {
       }
     });
 }
+
+  onClose() {
+  this.showModal = false;
+  }
 
 }
