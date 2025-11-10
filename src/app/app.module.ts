@@ -17,6 +17,11 @@ import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { LandingPageComponent } from './Components/landing-page/landing-page.component';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { ListEffects } from './state/effects/list.effect';
+import { reducers } from './state/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,12 @@ import { FormsModule } from '@angular/forms';
     LandingPageComponent
   ],
   imports: [
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([ListEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false
+    }),
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
