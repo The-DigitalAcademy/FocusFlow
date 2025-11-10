@@ -36,6 +36,7 @@
 
 .task-header {
     font-family: var(--body-font);
+    cursor: pointer;
 }
 .edit-button, .delete-button {
     cursor: pointer;

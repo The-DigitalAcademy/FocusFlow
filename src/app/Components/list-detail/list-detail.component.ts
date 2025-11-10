@@ -67,8 +67,12 @@ export class ListDetailComponent {
     });
 }
 
-  onClose() {
+onClose() {
   this.showModal = false;
   }
+
+isComplete(index: number) {
+  this.tasks[index].isDone = !this.tasks[index].isDone;
+}
 
 }
