@@ -16,6 +16,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { LandingPageComponent } from './Components/landing-page/landing-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,11 @@ import { LandingPageComponent } from './Components/landing-page/landing-page.com
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

@@ -1,0 +1,51 @@
+import { UserService } from './user.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Users } from '../models/Users';
+import { Lists } from '../models/Lists';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ListService {
+
+  constructor(
+    private httpClient: HttpClient,
+    private userService: UserService
+  ) { }
+
+  private url = 'http://localhost:3000/lists';
+
+  loggedUser: Users | null = this.userService.getCurrentUser();
+  
+  //Add a list
+  addList(list: Lists): Observable<Lists>{
+    const newList: Lists = {
+      ...list,
+      id: 1
+    };
+
+    return this.httpClient.post<Lists>(this.url, newList);
+  }
+
+  //Update list
+  updateList(list: Lists): Observable<Lists>{
+    return this.httpClient.put<Lists>(this.url, list);
+  }
+
+  //get a single list
+  getSingleList(id: number): Observable<Lists>{
+    return this.httpClient.get<Lists>(`${this.url}/${id}`);
+  }
+
+  //get all lists
+  getAll(): Observable<Lists[]>{
+    return this.httpClient.get<Lists[]>(this.url);
+  }
+
+  //delete list
+  deleteList(id: number): Observable<void>{
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
+}
