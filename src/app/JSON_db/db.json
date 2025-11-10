@@ -108,6 +108,20 @@
       "surname": "mosia",
       "email": "nkelemosia@gmail",
       "password": "083hrk"
+    },
+    {
+      "id": 1,
+      "name": "nkele",
+      "surname": "mosia",
+      "email": "nkelemosia@gmail.com",
+      "password": "083hrk"
+    },
+    {
+      "id": 1,
+      "name": "nkele",
+      "surname": "mosia",
+      "email": "nkelemosia@gmail.com",
+      "password": "083hrk"
     }
   ],
   "lists": [
