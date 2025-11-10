@@ -287,10 +287,24 @@
   ],
   "tasks": [
     {
+      "id": "1",
+      "name": "Wake up at 6 AM",
+      "dueDate": "05-11-25",
+      "importance": "Very",
+      "isDone": true
+    },
+    {
       "id": "2",
       "name": "Drink 2L water",
       "dueDate": "05-11-25",
       "importance": "Average",
+      "isDone": false
+    },
+    {
+      "id": "3",
+      "name": "Meditate 10 min",
+      "dueDate": "06-11-25",
+      "importance": "Low",
       "isDone": false
     },
     {
