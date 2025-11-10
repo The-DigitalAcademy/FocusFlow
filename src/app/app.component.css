@@ -1,0 +1,15 @@
+.main-content {
+  display: flex;
+  height: 100vh;
+}
+
+router-outlet {
+  margin-left: 350px; /* create space for sidebar */
+  display: block;
+}
+
+.main-content.no-sidebar {
+  display: block;          /* remove flex behavior */
+  margin: 0;
+  padding: 0;
+}
