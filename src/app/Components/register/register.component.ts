@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 import { validateLocaleAndSetLanguage } from 'typescript';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,9 +11,13 @@ import { validateLocaleAndSetLanguage } from 'typescript';
 })
 export class RegisterComponent {
   
+  
   registerForm: FormGroup;
 
-  constructor() {
+  constructor(
+    private userService: UserService, 
+    private router: Router
+  ) {
     this.registerForm = new FormGroup({
       name: new FormControl('', Validators.required),
       surname: new FormControl('', Validators.required),
@@ -21,7 +27,17 @@ export class RegisterComponent {
   }
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      this.userService.register(this.registerForm.value).subscribe(
+        response => {
+          console.log('Registration successful', response);
+  
+        this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error('Registration failed', error);
+        }
+      )
+      
     }
   }
 
