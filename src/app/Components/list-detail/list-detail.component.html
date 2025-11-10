@@ -15,13 +15,13 @@
                 <h1 class="task-header" [ngStyle]="{'text-decoration': task.isDone? 'line-through' : 'none'}" (click)="isComplete(i)">{{task.name}}</h1>
             </div>
             <div class="task-settings">
-            <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" (click)="editTask(task.id)">
+            <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" (click)="editTask(task.id, task.isDone)">
             <img src="../../../assets/material-symbols_delete.svg" class="delete-button" (click)="deleteTask(task.id)">
             </div> 
         </div>
 
     </div>
-     <app-add-task *ngIf="showModal" [isVisible]="showModal" (close)="onClose()" [editTaskId]="selectedTaskId" [addTaskArr]="addTaskArr"></app-add-task>
+     <app-add-task *ngIf="showModal" [isVisible]="showModal" (close)="onClose()" [editTaskId]="selectedTaskId" [addTaskArr]="addTaskArr" [done]="selectedTaskIsDone"></app-add-task>
  
 
     <ng-template #noTasks>

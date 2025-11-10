@@ -47,13 +47,15 @@ export class ListDetailComponent {
    selectedTaskId: number | null = null;
    showModal = false
    addTaskArr = this.tasks
+   selectedTaskIsDone: boolean = false
 
   addTask() {
     this.showModal = true;
   }
 
-  editTask ( id: number) {
+  editTask ( id: number, isDone: boolean) {
     this.selectedTaskId = id;
+    this.selectedTaskIsDone = isDone
     this.showModal = true;
 
   }
