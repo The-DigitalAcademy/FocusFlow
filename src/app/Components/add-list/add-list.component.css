@@ -91,3 +91,7 @@ body{
     margin-top: 20px;
     padding: 10px;
 }
+:host, :host * {
+  all: unset;
+  box-sizing: border-box;
+}

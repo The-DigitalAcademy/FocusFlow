@@ -1,0 +1,103 @@
+:root {
+    --header-font: "Chewy", system-ui;
+    --body-font: "Zalando Sans", sans-serif;
+    --main-blue-color: #EEFEFC;
+    --main-pink-color: #FFBDBD;
+    --dark-pink-color: #FFA4A4;
+    --add-button-color: #d6ffdb;
+    --remove-button-color: #FFC2B5;
+}
+
+/* General page styling */
+.login-container {
+  max-width: 450px;
+  margin: 150px auto;
+  padding: 5rem;
+  background: var(--main-blue-color);
+  border-radius: 10px;
+  box-shadow: var(--main-pink-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Headings */
+p:first-child {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #121212;
+}
+
+/* Labels and inputs */
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #000000;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Sign in button */
+.sign-in-button {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sign-in-button:hover:not(:disabled) {
+  background-color: var(--dark-pink-color);
+}
+
+.sign-in-button:disabled {
+  background-color: var(--remove-button-color);
+  cursor: not-allowed;
+}
+
+/* Register link */
+p {
+  margin-top: 1rem;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-link {
+  color: rgb(0, 110, 255);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+:host, :host * {
+  all: unset;
+  box-sizing: border-box;
+}

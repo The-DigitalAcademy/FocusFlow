@@ -1,0 +1,85 @@
+:root {
+    --header-font: "Chewy", system-ui;
+    --body-font: "Zalando Sans", sans-serif;
+    --main-blue-color: #EEFEFC;
+    --main-pink-color: #FFBDBD;
+    --dark-pink-color: #FFA4A4;
+    --add-button-color: #D6FFDB;
+    --remove-button-color: #FFC2B5;
+}
+
+.Sidebar {
+    width: 300px; 
+    height: 95vh;
+    background-color: var(--main-blue-color);
+    padding: 20px;
+    border-radius: 20px; 
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px; 
+    font-family: var(--body-font);
+    transition: all 0.3s ease; 
+    position: fixed;
+}
+
+ul {
+    list-style: disc;   
+    padding-left: 20px; 
+    margin-top: 50px;
+}
+
+li {
+    margin: 8px 0; 
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+li:hover {
+    text-decoration: underline;
+    font-size: 1.3rem;
+    transition: all 0.3s ease; 
+}
+.active {
+    background: var(--dark-pink-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 2.5px;
+}
+
+h3 {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu-icon {
+    margin-right: 10px; 
+}
+
+.moon-icon,
+.signout-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle; 
+}
+
+
+.dark-mode, .sign-out {
+    display: flex;
+    align-items: center;  
+    gap: 12px;            
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+}
+
+
+.dark-mode:hover, .sign-out:hover {
+    text-decoration: underline;
+    font-size: 1.3rem;
+    transition: all 0.2s ease; 
+}
