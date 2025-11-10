@@ -3,9 +3,10 @@
     <div class="top-sidebar">
     <h3 routerLink="/home"><span class="menu-icon">☰</span> Lists</h3>
     <ul>
-        <li (click)="filter('Personal')">Personal</li>
-        <li (click)="filter('Work')">Work</li>
-        <li (click)="filter('Shopping')">Shopping</li>
+        <li (click)="filter(null)" [class.active]="!currentFilter">All Lists</li>
+        <li (click)="filter('Personal')" [class.active]="(currentFilter | async) === 'Personal'">Personal</li>
+        <li (click)="filter('Work')" [class.active]="(currentFilter | async) === 'Work'">Work</li>
+        <li (click)="filter('Shopping')" [class.active]="(currentFilter | async) === 'Shopping'">Shopping</li>
     </ul>
 </div>
     <div class="bottom-section">

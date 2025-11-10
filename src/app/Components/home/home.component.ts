@@ -1,50 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { Lists } from 'src/app/models/Lists';
 import { FilterService } from 'src/app/services/filter.service';
 import { ListService } from 'src/app/services/list.service';
-import { TaskService } from 'src/app/services/task.service';
+import * as ListActions from '../../state/actions/list.actions'
 import { Router } from '@angular/router';
+import { selectAllLists, selectFilteredLists, selectLoading } from 'src/app/state/selectors/list.selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/reducers';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  list = signal<Lists[]>([]);
+export class HomeComponent implements OnInit{
+
+  list = this.store.select(selectFilteredLists);
+  loading = this.store.select(selectLoading);
 
   //Constructor
   constructor(
-    private httpClient: HttpClient,
-    private filterService: FilterService,
-    private taskService: TaskService,
-    private listService: ListService,
+    private store: Store<AppState>,
     public router: Router
   ){}
 
-  filteredItems = computed(() => {
-    const filter = this.filterService.selectedFilter();
-    if(!filter) return this.list();
-    return this.list().filter(item => item.category === filter);
-  });
-
   ngOnInit(): void {
-    this.listService.getAll().subscribe({
-      next: (response: Lists[]) => this.list.set(response),
-      error: (err) => console.log('Error loading lists: ', err)
-    })
+    this.store.dispatch(ListActions.loadLists());
   }
-  boxes = [
-    { name:'List 1', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
-    { name:'List 2', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
-    { name:'List 3', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]}, 
-    { name:'List 4', tasks: [{ title: 'Task 1'}, { title: 'Task 2'}, { title: 'Task 3'}]},
-    { showPlus: true },
-    
-  ];
 
   navigateToDetail(index: number) {
+    this.store.dispatch(ListActions.selectList({listId: index}));
     this.router.navigate(['/list-detail', index]);
   }
 

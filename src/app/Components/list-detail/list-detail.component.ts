@@ -1,24 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/services/task.service';
 import { Tasks } from 'src/app/models/Tasks';
 import { ActivatedRoute } from '@angular/router';
 import { ListService } from 'src/app/services/list.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/reducers';
+import { selectSelectedList } from 'src/app/state/selectors/list.selectors';
+import * as ListActions from '../../state/actions/list.actions';
 
 @Component({
   selector: 'app-list-detail',
   templateUrl: './list-detail.component.html',
   styleUrls: ['./list-detail.component.css']
 })
-export class ListDetailComponent {
-   constructor( 
+export class ListDetailComponent implements OnInit{
+   
+  constructor( 
     private taskService : TaskService,
     private route: ActivatedRoute,
-    private listService: ListService
-   ) {}
-    tasks: Tasks[] = [];
+    private listService: ListService,
+    private store: Store<AppState>
+  ) {}
+
+  tasks: Tasks[] = [];
   listName: string = '';
+  list = this.store.select(selectSelectedList);
     ngOnInit(): void {
       const paramListID = this.route.snapshot.paramMap.get('id');
+      this.store.dispatch(ListActions.selectList({ listId: Number(paramListID)}))
       this.listService.getSingleList(Number(paramListID)).subscribe({
         next: (response) => {
           this.listName = response.name;

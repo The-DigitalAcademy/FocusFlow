@@ -40,7 +40,12 @@ li:hover {
     text-decoration: underline;
     font-size: 1.3rem;
     transition: all 0.3s ease; 
-
+}
+.active {
+    background: var(--dark-pink-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 2.5px;
 }
 
 h3 {

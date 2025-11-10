@@ -8,5 +8,6 @@ export class FilterService {
 
   setFilter(filter: string | null){
     this.selectedFilter.set(filter);
+    console.log(this.selectedFilter());
   }
 }
