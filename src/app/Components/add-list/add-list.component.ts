@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-list',
   templateUrl: './add-list.component.html',
-  styleUrls: ['./add-list.component.css']
+  styleUrls: ['./add-list.component.css'],
 })
 export class AddListComponent {
   taskForm: FormGroup;
