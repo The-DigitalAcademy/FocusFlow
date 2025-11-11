@@ -12,10 +12,10 @@ import * as UserActions from '../../state/actions/user.actions'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginForm = new FormGroup({
-    email: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
-  });
+  loginForm = new FormGroup({
+  email: new FormControl('',[Validators.required, Validators.email]),
+  password: new FormControl('', Validators.required)
+});
 
   constructor(
     private router: Router,
