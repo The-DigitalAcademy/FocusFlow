@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router"
 import { Store } from '@ngrx/store';
-import { throwError } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import * as UserActions from '../../state/actions/user.actions'
 
