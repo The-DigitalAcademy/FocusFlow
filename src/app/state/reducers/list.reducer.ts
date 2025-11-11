@@ -31,5 +31,10 @@ export const listReducer = createReducer<ListState>(
     on(ListActions.setFilter, (state, {category}): ListState => ({
         ...state,
         filter: category
+    })),
+
+    on(ListActions.updateListSuccess, (state, {list}) => ({
+        ...state,
+        ...list
     }))
 );

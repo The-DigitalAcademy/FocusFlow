@@ -22,3 +22,13 @@ export const setFilter = createAction(
     '[Sidebar] Set filter',
     props<{ category: string | null}>()
 );
+
+export const updateListSuccess = createAction(
+    '[List API] Update list Success',
+    props<{list: Lists}>()
+);
+
+export const updateListFailure = createAction(
+    '[List API] Update List Failure',
+    props<{error: string}>()
+);

@@ -18,6 +18,7 @@ export class ListDetailComponent implements OnInit {
   tasks: Tasks[] = [];
   loading = true;
   listTitle = '';
+  listId!: any;
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
@@ -25,8 +26,8 @@ export class ListDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const listId = this.route.snapshot.paramMap.get('id')!;
-    this.store.dispatch(ListActions.selectList({ listId }));
+    this.listId = this.route.snapshot.paramMap.get('id')!;
+    this.store.dispatch(ListActions.selectList({ listId: this.listId }));
 
     this.list$.pipe(take(1)).subscribe(list => {
       if (list && list.tasksID && list.tasksID.length > 0) {
