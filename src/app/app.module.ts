@@ -23,6 +23,7 @@ import { reducers } from './state/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserEffects } from './state/effects/user.effect';
+import { TaskEffects } from './state/effects/task.effect';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { UserEffects } from './state/effects/user.effect';
   ],
   imports: [
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ListEffects, UserEffects]),
+    EffectsModule.forRoot([ListEffects, UserEffects, TaskEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false

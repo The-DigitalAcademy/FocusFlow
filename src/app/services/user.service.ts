@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Users } from '../models/Users';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +19,25 @@ export class UserService {
 
   //Login
   login(email: string, pass: string): Observable<Users>{
-    return this.httpClient.get<Users>(`${this.url}?email=${email}&password=${pass}`);
+    return this.httpClient.get<Users[]>(`${this.url}?email=${email}&password=${pass}`).pipe(
+      map(users => {
+        if(users.length === 0) throw new Error('Invalid credentials');
+        return users[0];
+      })
+    )
   }
 
-  //get current user
+  setCurrentUser(user: Users) {
+  localStorage.setItem('current_user', JSON.stringify(user));
+  }
+
   getCurrentUser(): Users | null {
     const data = localStorage.getItem('current_user');
     return data ? JSON.parse(data) : null;
+  }
+
+  clearCurrentUser() {
+    localStorage.removeItem('current_user');
   }
 
   //Logout
@@ -34,8 +46,8 @@ export class UserService {
   }
 
   //Delete user?
-  deleteUser(id: number): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}?id=${id}`);
+  deleteUser(id: string): Observable<void>{
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
   
   //Edit user?

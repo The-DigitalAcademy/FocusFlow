@@ -2,7 +2,7 @@ import { Lists } from "src/app/models/Lists";
 
 export interface ListState {
     lists: Lists[];
-    selectedListId: number | null;
+    selectedListId: string | null;
     loading: boolean;
     error: string | null;
     filter: string | null;

@@ -4,9 +4,8 @@
     <h3 routerLink="/home"><span class="menu-icon">☰</span> Lists</h3>
     <ul>
         <li (click)="filter(null)" [class.active]="!currentFilter">All Lists</li>
-        <li (click)="filter('Personal')" [class.active]="(currentFilter | async) === 'Personal'">Personal</li>
-        <li (click)="filter('Work')" [class.active]="(currentFilter | async) === 'Work'">Work</li>
-        <li (click)="filter('Shopping')" [class.active]="(currentFilter | async) === 'Shopping'">Shopping</li>
+        <li *ngFor="let category of categories | async" (click)="filter(category)" [class.active]="(currentFilter | async) === category">{{category | titlecase}}</li>
+        
     </ul>
 </div>
     <div class="bottom-section">

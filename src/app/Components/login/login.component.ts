@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router"
+import { Store } from '@ngrx/store';
 import { throwError } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import * as UserActions from '../../state/actions/user.actions'
 
 @Component({
   selector: 'app-login',
@@ -15,17 +17,20 @@ export class LoginComponent implements OnInit {
   password: new FormControl('', Validators.required)
 });
 
-constructor(private router: Router) {}
-ngOnInit(): void {
-  
-}
-onSubmit(){
-  // to call your Login API here
-  console.log(this.loginForm.value);
-  // if login is successful, navigate to the desired route
-  // this.routeer.navigate(['/dashboard]);
-}
-register(){
-  this.router.navigate(['/register']);
-}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private store: Store
+  ) {}
+  ngOnInit(): void {
+    
+  }
+  onSubmit(){
+    
+    this.store.dispatch(UserActions.login({email: this.loginForm.value.email!, password: this.loginForm.value.password!}))
+
+  }
+  register(){
+    this.router.navigate(['/register']);
+  }
 }

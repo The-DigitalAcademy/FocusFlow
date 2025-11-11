@@ -1,5 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ListState } from '../models/ListState';
+import { selectCurrentUser } from './user.selectors';
+import { TaskState } from '../models/TaskState';
+import { Lists } from 'src/app/models/Lists';
+
+const selectTaskState = (state: any) => state.task as TaskState;
 
 export const selectListFeature = createFeatureSelector<ListState>('list');
 
@@ -31,4 +36,63 @@ export const selectSelectedList = createSelector(
   selectAllLists,
   selectListFeature,
   (lists, state) => lists.find(l => l.id === state?.selectedListId) || null
+);
+
+export const selectUserCategories = createSelector(
+  selectListFeature,
+  (state) => {
+    const categories = new Set<string>();
+    state.lists.forEach(list => {
+      if(list.category) categories.add(list.category);
+    });
+    return Array.from(categories).sort()
+  }
+);
+
+export const selectUserLists = createSelector(
+  selectAllLists,
+  selectCurrentUser,
+  (lists, user) => {
+    if (!user) return [];
+    return lists.filter(list => list.userId === user.id);
+  }
+);
+
+export const selectFilteredUserLists = createSelector(
+  selectUserLists,
+  selectFilter,
+  (lists, filter) => {
+    if (!filter) return lists;
+    return lists.filter(list => list.category === filter);
+  }
+);
+
+export const selectFilteredUserListsWithTasks = createSelector(
+  selectFilteredUserLists,
+  selectTaskState,
+  (lists: Lists[], taskState: TaskState): Lists[] => {
+    // 1. Build Map with STRING keys
+    const taskMap = new Map<string, any>();
+    taskState.tasks.forEach(t => taskMap.set(String(t.id), t));
+
+    // 2. Extract ID from ANY format: string | number | { id: ... }
+    const getId = (entry: any): string => {
+      if (entry === null || entry === undefined) return '';
+      if (typeof entry === 'string') return entry;
+      if (typeof entry === 'number') return String(entry);   // <-- FIX 1
+      if (typeof entry === 'object' && 'id' in entry) return String(entry.id);
+      return '';
+    };
+
+    // 3. Transform
+    return lists.map(list => {
+      const enriched = list.tasksID.map(entry => {
+        const id = getId(entry);
+        const fullTask = taskMap.get(id);
+        return fullTask ?? { id, name: '…', isDone: false };
+      });
+
+      return { ...list, tasksID: enriched };
+    });
+  }
 );
