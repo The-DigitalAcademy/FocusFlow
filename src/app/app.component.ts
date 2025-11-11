@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as UserActions from './state/actions/user.actions'
-import { selectCurrentUser } from './state/selectors/user.selectors';
+import { selectCurrentUser, selectIsLoggedIn } from './state/selectors/user.selectors';
 import { filter, take } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
@@ -20,14 +20,9 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.store.dispatch(UserActions.loadUserFromStorage());
     
-    this.store.select(selectCurrentUser).pipe(
-      filter(user => !!user),
-      take(1)
-    ).subscribe(() => {
-      if (this.router.url === '/login' || this.router.url === '/landing') {
-        this.router.navigate(['/home']);
-      }
-    });
+    this.store.select(selectIsLoggedIn).pipe(take(2)).subscribe(isLoggedIn => {
+    this.router.navigate([isLoggedIn ? '/home' : '/login']);
+  });
   }
   shouldShowSidebar(): boolean {
     // list all routes where the sidebar should NOT appear

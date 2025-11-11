@@ -27,15 +27,17 @@ export class UserService {
     )
   }
 
-  //get current user
+  setCurrentUser(user: Users) {
+  localStorage.setItem('current_user', JSON.stringify(user));
+  }
+
   getCurrentUser(): Users | null {
     const data = localStorage.getItem('current_user');
     return data ? JSON.parse(data) : null;
   }
 
-  //set current user
-  setCurrentUser(user: Users): void {
-    localStorage.setItem('currentUser', JSON.stringify(user));
+  clearCurrentUser() {
+    localStorage.removeItem('current_user');
   }
 
   //Logout
@@ -45,7 +47,7 @@ export class UserService {
 
   //Delete user?
   deleteUser(id: string): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}?id=${id}`);
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
   
   //Edit user?

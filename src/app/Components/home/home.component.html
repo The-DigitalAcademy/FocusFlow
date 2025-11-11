@@ -12,7 +12,7 @@
 
                 <ul class="task-preview">
                 <li *ngFor="let task of eachList.tasksID | slice:0:3">
-                    <span [class.done]="task.isDone"></span>
+                    <span [class.done]="!task.isDone"></span>
                     {{ task.name }}
                 </li>
                 <li *ngIf="eachList.tasksID.length > 3" class="more-tasks">

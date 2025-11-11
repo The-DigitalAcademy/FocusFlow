@@ -26,17 +26,9 @@ export class LoginComponent implements OnInit {
     
   }
   onSubmit(){
-    // to call your Login API here
+    
     this.store.dispatch(UserActions.login({email: this.loginForm.value.email!, password: this.loginForm.value.password!}))
 
-    // this.userService.login(this.loginForm.value.email!, this.loginForm.value.password!).subscribe({
-    //   next: (response) => {
-    //     this.router.navigate(['/home']);
-    //   },
-    //   error: (err) => {
-    //     throwError(() => Error(err));
-    //   }
-    // })
   }
   register(){
     this.router.navigate(['/register']);

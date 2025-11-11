@@ -6,7 +6,7 @@ import { selectSelectedList } from 'src/app/state/selectors/list.selectors';
 import * as ListActions from '../../state/actions/list.actions';
 import { TaskService } from 'src/app/services/task.service';
 import { Tasks } from 'src/app/models/Tasks';
-import { take } from 'rxjs/operators';
+import { flatMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-detail',
@@ -39,7 +39,7 @@ export class ListDetailComponent implements OnInit {
         this.listTitle = list.name;
         taskIds.forEach(id => {
           this.taskService.getTaskById(String(id)).subscribe({
-            next: (task) => {
+            next: (task: Tasks) => {
               this.tasks.push(task);
               console.log(this.tasks);
             },
@@ -47,6 +47,7 @@ export class ListDetailComponent implements OnInit {
             complete: () => {
               if (this.tasks.length === taskIds.length) {
                 this.loading = false;
+                
               }
             }
           });
@@ -74,4 +75,6 @@ export class ListDetailComponent implements OnInit {
     this.showModal = false;
     this.selectedTaskId = null;
   }
+
+  
 }

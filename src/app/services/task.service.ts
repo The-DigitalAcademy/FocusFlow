@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tasks } from '../models/Tasks';
-import { Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class TaskService {
 
   //get a single task
   getTaskById(id: string): Observable<Tasks>{
-    return this.httpClient.get<Tasks>(`${this.url}?id=${id}`);
+    return this.httpClient.get<Tasks>(`${this.url}/${id}`);
   };
 
   //get all tasks
@@ -34,6 +34,6 @@ export class TaskService {
 
   //Delete task
   deleteTask(id: string): Observable<void>{
-    return this.httpClient.delete<void>(`${this.url}?email=${id}`);
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 }
