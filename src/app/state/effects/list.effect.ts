@@ -52,7 +52,7 @@ export class ListEffects {
       })
     )
   );
-
+  
     removeList$ = createEffect(() => 
         this.actions$.pipe(
             ofType(ListActions.removeList),

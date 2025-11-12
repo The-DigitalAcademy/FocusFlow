@@ -63,7 +63,7 @@ export class EditTaskComponent implements OnInit, OnDestroy {
     };
 
     this.store.dispatch(TaskActions.updateTask({ task: updated }));
-
+    
     this.actions$
     .pipe(
       ofType(TaskActions.updateTaskSuccess, ListActions.updateListSuccess),
