@@ -31,6 +31,7 @@ export class AddTaskComponent {
   @Output() addTaskArrChange = new EventEmitter<Tasks[]>();
 
   @Input() done: boolean = false 
+  tasks: any;
 
   constructor(
     private taskService: TaskService,
@@ -108,7 +109,7 @@ export class AddTaskComponent {
     this.taskService.deleteTask(id).subscribe({
       next: () => {
         // Remove the deleted task from the tasks array
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        this.tasks = this.tasks.filter((task: { id: string; }) => task.id !== id);
       }
     });
 }

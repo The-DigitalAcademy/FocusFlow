@@ -6,6 +6,7 @@ import * as UserActions from '../../state/actions/user.actions';
 import { Router } from '@angular/router';
 import { selectCurrentUser, selectIsLoggedIn } from 'src/app/state/selectors/user.selectors';
 import { selectListFeature, selectUserCategories } from 'src/app/state/selectors/list.selectors';
+import { ThemeServiceService } from 'src/app/services/theme-service.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -15,8 +16,14 @@ export class SidebarComponent {
   
   constructor(
     private router: Router,
+    private themeService: ThemeServiceService,
     private store: Store<AppState>
+        
   ){}
+
+  ngOnInit() {
+    this.themeService.loadTheme()
+  }
 
   categories = this.store.select(selectUserCategories);
   currentFilter = this.store.select(state => state.list.filter);
@@ -34,9 +41,11 @@ export class SidebarComponent {
     }).unsubscribe();
     return count;
   }
-  toggleDark(){
-
+  
+   toggleTheme() {
+    this.themeService.toggleTheme()
   }
+
   logout(){
     this.store.dispatch(UserActions.logout());
     localStorage.removeItem('current_user');

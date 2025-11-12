@@ -19,7 +19,7 @@ export class EditTaskComponent {
 
   @Input() isVisible: boolean = false;
   @Output() closeEdit = new EventEmitter<void>();
-  @Input() editTaskId: number | null = null;
+  @Input() editTaskId: string | null = null;
 
   // Updates the task array for both parent and child
   @Input() addTaskArr: Tasks[] = []
@@ -55,7 +55,7 @@ export class EditTaskComponent {
 
   editTask() {
   const updateTask = {
-    id: Number(this.editTaskId),
+    id: String(this.editTaskId),
     name: this.taskTitle,
     dueDate: this.taskDueDate,
     importance: this.taskPriority,

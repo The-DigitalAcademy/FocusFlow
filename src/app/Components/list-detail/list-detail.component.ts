@@ -59,7 +59,7 @@ export class ListDetailComponent implements OnInit {
     });
   }
 
-  selectedTaskId: number | null = null;
+  selectedTaskId: string | null = null;
   showModal = false;
    addTaskArr = this.tasks
    selectedTaskIsDone: boolean = false
@@ -71,20 +71,13 @@ export class ListDetailComponent implements OnInit {
   }
 
   editTask(id: string, isDone: boolean) {
-    this.selectedTaskId = Number(id);
+    this.selectedTaskId = String(id);
     this.selectedTaskIsDone = isDone
     this.showEditModal = true;
 
   }
 
-   deleteTask(id: string) {
-    this.taskService.deleteTask(id).subscribe({
-      next: () => {
-        // Remove the deleted task from the tasks array
-        this.tasks = this.tasks.filter(task => task.id !== id);
-      }
-    });
-}
+  
 
 onClose() {
     this.showModal = false;
