@@ -2561,13 +2561,6 @@
       "isDone": false
     },
     {
-      "id": "221",
-      "name": "Packing list",
-      "dueDate": "18-12-25",
-      "importance": "High",
-      "isDone": false
-    },
-    {
       "id": "222",
       "name": "Lego Star Wars",
       "dueDate": "10-12-25",
@@ -2746,13 +2739,6 @@
       "id": "00d3",
       "name": "buy washing powder",
       "dueDate": "2025-11-20",
-      "importance": "high",
-      "isDone": false
-    },
-    {
-      "id": "712f",
-      "name": "buy washing powder",
-      "dueDate": "2025-11-21",
       "importance": "high",
       "isDone": false
     },

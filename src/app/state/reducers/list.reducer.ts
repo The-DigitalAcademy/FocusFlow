@@ -58,5 +58,22 @@ export const listReducer = createReducer<ListState>(
         ...state,
         lists: state.lists.filter(l => l.id !== list.id),
         loading: false
+    })),
+
+    on(ListActions.updateTaskList, (state, {id}) => ({
+        ...state,
+        loading: true
+    })),
+
+    on(ListActions.updateTaskListSuccess, (state, { taskId }) => ({
+    ...state,
+    lists: state.lists.map(l =>
+        l.id === state.selectedListId
+        ? {
+            ...l,
+            taskIDs: l.tasksID.filter(task => task.id !== taskId)
+            }
+        : l
+    )
     }))
 );
