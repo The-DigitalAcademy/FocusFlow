@@ -36,6 +36,7 @@
 
 .task-header {
     font-family: var(--body-font);
+    cursor: pointer;
 }
 .edit-button, .delete-button {
     cursor: pointer;
@@ -65,4 +66,17 @@
 .no-tasks-message {
     text-align: center;
     margin-top: 100px;
+}
+
+.task-settings {
+    display: flex;
+    align-items: center;
+}
+
+.importance {
+    margin-right: 50px;
+    background-color: #ff6e6e;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
 }

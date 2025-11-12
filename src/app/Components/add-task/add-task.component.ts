@@ -1,5 +1,5 @@
 import { ListService } from 'src/app/services/list.service';
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { catchError, map, of, switchMap, throwError } from 'rxjs';
 import { Tasks } from 'src/app/models/Tasks';
 import { TaskService } from 'src/app/services/task.service';
@@ -11,8 +11,14 @@ import { Lists } from 'src/app/models/Lists';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
+  // Has the new task data on it.
+  addedTasks: Tasks[] = [];
 
-  tasks: Tasks[] = [];
+  // Form fields 
+  taskTitle: any = ''
+  taskDueDate: any = ''
+  taskPriority: any = ''
+
   newTask!: Omit<Tasks, "id">;
   @Input() isVisible: boolean = false;
   @Output() close = new EventEmitter<void>();
@@ -20,10 +26,31 @@ export class AddTaskComponent {
   @Input() listId: String | null = null;
   @Input() currentList!: Lists;
 
-  taskTitle: any = '';
-  taskDueDate: any = '';
-  taskPriority: any = '';
-  
+  // Updates the task array for both parent and child
+  @Input() addTaskArr: Tasks[] = []
+  @Output() addTaskArrChange = new EventEmitter<Tasks[]>();
+
+  @Input() done: boolean = false 
+
+  constructor(
+    private taskService: TaskService,
+  ) { }
+
+  ngOnInit() {
+    if (this.editTaskId !== null) {
+      const taskToEdit = this.addTaskArr.find(t => t.id === this.editTaskId);
+      if (taskToEdit) {
+        this.taskTitle = taskToEdit.name;
+        this.taskDueDate = taskToEdit.dueDate;
+        this.taskPriority = taskToEdit.importance;
+      }
+    } else {
+      // Add task input is empty when clicked 
+      this.taskTitle = '';
+      this.taskDueDate = '';
+      this.taskPriority = '';
+    }
+  }
   constructor(
     private taskService: TaskService,
     private listService: ListService
@@ -31,6 +58,7 @@ export class AddTaskComponent {
   onClose() {
     this.close.emit();
     this.isVisible = false;
+    
   }
 
   addTask() {

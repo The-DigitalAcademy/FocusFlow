@@ -61,21 +61,39 @@ export class ListDetailComponent implements OnInit {
 
   selectedTaskId: number | null = null;
   showModal = false;
+   addTaskArr = this.tasks
+   selectedTaskIsDone: boolean = false
+   showEditModal = false
 
   addTask() {
     this.showModal = true;
     this.selectedTaskId = null;
   }
 
-  editTask(id: string) {
+  editTask(id: string, isDone: boolean) {
     this.selectedTaskId = Number(id);
-    this.showModal = true;
+    this.selectedTaskIsDone = isDone
+    this.showEditModal = true;
+
   }
 
-  onClose() {
+   deleteTask(id: number) {
+    this.taskService.deleteTask(id).subscribe({
+      next: () => {
+        // Remove the deleted task from the tasks array
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      }
+    });
+}
+
+onClose() {
     this.showModal = false;
     this.selectedTaskId = null;
+  this.showEditModal = false;
   }
 
-  
+isComplete(index: number) {
+  this.tasks[index].isDone = !this.tasks[index].isDone;
+}
+
 }
