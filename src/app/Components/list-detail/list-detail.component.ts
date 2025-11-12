@@ -75,7 +75,7 @@ export class ListDetailComponent implements OnInit, OnDestroy {
   }
 
   editTask(id: string, isDone: boolean) {
-    this.selectedTaskId = Number(id);
+    this.selectedTaskId = String(id);
     this.selectedTaskIsDone = isDone
     this.showEditModal = true;
 

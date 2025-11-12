@@ -53,6 +53,7 @@ import { TaskEffects } from './state/effects/task.effect';
     HttpClientModule,
     RouterModule,
     FormsModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent]

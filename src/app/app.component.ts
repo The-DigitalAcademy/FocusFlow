@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as UserActions from './state/actions/user.actions'
 import { selectCurrentUser, selectIsLoggedIn } from './state/selectors/user.selectors';
 import { filter, take } from 'rxjs/operators';
+import { ThemeServiceService } from './services/theme-service.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit{
 
   constructor(
     public router: Router,
-    private store: Store
+    private store: Store,
   ) { }
 
   ngOnInit(): void {
@@ -22,10 +23,12 @@ export class AppComponent implements OnInit{
     
     this.store.select(selectIsLoggedIn).pipe(take(2)).subscribe(isLoggedIn => {
     this.router.navigate([isLoggedIn ? '/home' : '/login']);
+
   });
   }
   shouldShowSidebar(): boolean {
     // list all routes where the sidebar should NOT appear
     return !['/login', '/register', '/add-list', '/landing'].includes(this.router.url);
   }
+
 }
