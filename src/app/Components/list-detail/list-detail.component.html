@@ -26,7 +26,7 @@
 
     </div>
      <app-add-task *ngIf="showModal" [isVisible]="showModal" [currentList]="currentList" (close)="onClose()" [editTaskId]="selectedTaskId"></app-add-task>
- 
+    <app-edit-task *ngIf="showEditModal" [isVisible]="showEditModal" [editTaskId]="selectedTaskId" (editClose)="onClose()"/>
 
     <ng-template #noTasks>
         <p class="no-tasks-message">No tasks available. Please add a task.</p>

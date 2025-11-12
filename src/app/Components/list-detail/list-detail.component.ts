@@ -6,9 +6,9 @@ import { selectFilteredUserListsWithTasks, selectSelectedList } from 'src/app/st
 import * as ListActions from '../../state/actions/list.actions';
 import { TaskService } from 'src/app/services/task.service';
 import { Tasks } from 'src/app/models/Tasks';
-import { map, take, takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Lists } from 'src/app/models/Lists';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
 import * as TaskActions from '../../state/actions/task.actions'
 import { Subject } from 'rxjs';
 
@@ -90,14 +90,14 @@ export class ListDetailComponent implements OnInit, OnDestroy {
     });    
   }
 
-onClose() {
-    this.showModal = false;
-    this.selectedTaskId = null;
-  this.showEditModal = false;
+  onClose() {
+      this.showModal = false;
+      this.selectedTaskId = null;
+      this.showEditModal = false;
   }
 
-isComplete(index: number) {
-  this.tasks[index].isDone = !this.tasks[index].isDone;
-}
+  isComplete(index: number) {
+    this.tasks[index].isDone = !this.tasks[index].isDone;
+  }
 
 }
