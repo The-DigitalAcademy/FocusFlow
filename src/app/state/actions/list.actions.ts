@@ -50,7 +50,7 @@ export const removeListFailure = createAction(
 
 export const updateTaskList = createAction(
     '[Update Task List] Update task list',
-    props<{id: number}>()
+    props<{id: string}>()
 );
 
 export const updateTaskListSuccess = createAction(

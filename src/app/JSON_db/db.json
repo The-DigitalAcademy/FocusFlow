@@ -2512,24 +2512,10 @@
       "isDone": false
     },
     {
-      "id": "214",
-      "name": "Cleaning supplies",
-      "dueDate": "25 every month",
-      "importance": "Low",
-      "isDone": false
-    },
-    {
       "id": "215",
       "name": "School snacks",
       "dueDate": "weekly",
       "importance": "High",
-      "isDone": true
-    },
-    {
-      "id": "216",
-      "name": "Lunchbox items",
-      "dueDate": "daily",
-      "importance": "Average",
       "isDone": true
     },
     {
@@ -2551,20 +2537,6 @@
       "name": "Sun City",
       "dueDate": "30-12-25",
       "importance": "Average",
-      "isDone": false
-    },
-    {
-      "id": "220",
-      "name": "Drakensberg cabin",
-      "dueDate": "02-01-26",
-      "importance": "High",
-      "isDone": false
-    },
-    {
-      "id": "222",
-      "name": "Lego Star Wars",
-      "dueDate": "10-12-25",
-      "importance": "High",
       "isDone": false
     },
     {
@@ -2614,13 +2586,6 @@
       "name": "R500 voucher",
       "dueDate": "10-12-25",
       "importance": "High",
-      "isDone": false
-    },
-    {
-      "id": "230",
-      "name": "Funny gift",
-      "dueDate": "12-12-25",
-      "importance": "Average",
       "isDone": false
     },
     {
@@ -2747,13 +2712,6 @@
       "name": "Night Market",
       "dueDate": "2025-11-29",
       "importance": "medium",
-      "isDone": false
-    },
-    {
-      "id": "7714",
-      "name": "Gift for the boy",
-      "dueDate": "2025-12-04",
-      "importance": "high",
       "isDone": false
     },
     {

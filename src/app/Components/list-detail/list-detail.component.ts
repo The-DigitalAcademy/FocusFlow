@@ -6,7 +6,7 @@ import { selectFilteredUserListsWithTasks, selectSelectedList } from 'src/app/st
 import * as ListActions from '../../state/actions/list.actions';
 import { TaskService } from 'src/app/services/task.service';
 import { Tasks } from 'src/app/models/Tasks';
-import { flatMap, map, take, takeUntil } from 'rxjs/operators';
+import { map, take, takeUntil } from 'rxjs/operators';
 import { Lists } from 'src/app/models/Lists';
 import { Actions, ofType } from '@ngrx/effects';
 import * as TaskActions from '../../state/actions/task.actions'
@@ -75,34 +75,20 @@ export class ListDetailComponent implements OnInit, OnDestroy {
   }
 
   editTask(id: string, isDone: boolean) {
-    this.selectedTaskId = String(id);
+    this.selectedTaskId = Number(id);
     this.selectedTaskIsDone = isDone
     this.showEditModal = true;
 
   }
 
    deleteTask(id: string) {
-       this.taskService.getTaskById(id).subscribe({
-         next: response => {
-           //get the task and remove it
-           this.store.dispatch(TaskActions.removeTask({task: response}));
-           //update the state
-           this.actions$.pipe(
-             ofType(TaskActions.removeTaskSuccess),
-             take(1),
-             takeUntil(this.destroy$)
-           )
-           .subscribe(() => {
-             console.log("Removed successfully");
-             this.onClose();
-           })
-         },
-         error: err => {
-           console.log(err);
-         }
-       })
-       
-     }
+    this.taskService.getTaskById(id).subscribe({
+      next: (task) => {
+        this.store.dispatch(TaskActions.removeTask({ task }));
+      },
+      error: (err) => console.error(err)
+    });    
+  }
 
 onClose() {
     this.showModal = false;

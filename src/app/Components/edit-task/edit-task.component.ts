@@ -33,7 +33,7 @@ export class EditTaskComponent {
 
   ngOnInit() {
     if (this.editTaskId !== null) {
-      const taskToEdit = this.addTaskArr.find(t => Number(t.id) === this.editTaskId);
+      const taskToEdit = this.addTaskArr.find(t => t.id === this.editTaskId);
       if (taskToEdit) {
         this.taskTitle = taskToEdit.name;
         this.taskDueDate = taskToEdit.dueDate;

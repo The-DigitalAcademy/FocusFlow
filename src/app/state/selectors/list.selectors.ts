@@ -74,22 +74,29 @@ export const selectFilteredUserListsWithTasks = createSelector(
     const taskMap = new Map<string, any>();
     taskState.tasks.forEach(t => taskMap.set(String(t.id), t));
 
-    const getId = (entry: any): string => {
-      if (entry === null || entry === undefined) return '';
+    const getId = (entry: any): string | null => {
+      if (entry === null || entry === undefined) return null;
       if (typeof entry === 'string') return entry;
-      if (typeof entry === 'number') return String(entry);  
+      if (typeof entry === 'number') return String(entry);
       if (typeof entry === 'object' && 'id' in entry) return String(entry.id);
-      return '';
+      return null;
     };
 
     return lists.map(list => {
-      const enriched = list.tasksID.map(entry => {
+      const validEnrichedTasks: any[] = [];
+
+      list.tasksID.forEach(entry => {
         const id = getId(entry);
+        if (!id) return;
+
         const fullTask = taskMap.get(id);
-        return fullTask ?? { id, name: '…', isDone: false };
+        if (fullTask) {
+          validEnrichedTasks.push(fullTask);
+        }
+        // Invalid/missing task → silently removed
       });
 
-      return { ...list, tasksID: enriched };
+      return { ...list, tasksID: validEnrichedTasks };
     });
   }
 );
