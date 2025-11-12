@@ -64,4 +64,16 @@ export class ListEffects {
         )
     )
 )
+
+  createList$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(ListActions.createList),
+      mergeMap(({ list }) => 
+        this.listService.addList(list).pipe(
+          map((createdList) => ListActions.createListsSuccess({ list: createdList })),
+          catchError((err) => of(ListActions.createListsFailure({ error: err.message })))
+        )
+      )
+    )
+)
 }

@@ -1,6 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import * as ListActions from '../actions/list.actions';
 import { initialState, ListState } from "../models/ListState";
+import { Lists } from "src/app/models/Lists";
 
 export const listReducer = createReducer<ListState>(
     initialState,
@@ -75,5 +76,10 @@ export const listReducer = createReducer<ListState>(
             }
         : l
     )
-    }))
+    })),
+
+    on(ListActions.createList, (state, { list }) => ({
+    ...state,
+    list: [...state.lists, list]
+  }))
 );
