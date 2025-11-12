@@ -16,7 +16,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { LandingPageComponent } from './Components/landing-page/landing-page.component';
-import { EditTaskComponent } from './Components/edit-task /edit-task.component';
+import { EditTaskComponent } from './Components/edit-task/edit-task.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
