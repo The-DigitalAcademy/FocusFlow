@@ -7,10 +7,22 @@
     --add-button-color: #d6ffdb;
     --remove-button-color: #FFC2B5;
     --box-shadow-color: rgba(0,0,0,0.1);
+    --color: black;
 }
 
+body.dark-theme {
+    background-color: #5a5a5a;
+     --color: white;
+    --main-blue-color: #009A87;
+    --main-pink-color: #FF5252;
+    --dark-pink-color: #C40000;
+    --add-button-color: #003707;
+    --remove-button-color: #F22C00;
+    --box-shadow-color: rgba(0,0,0,0.1);
+}
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: var(--color);
 }
