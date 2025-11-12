@@ -36,5 +36,15 @@ export const listReducer = createReducer<ListState>(
     on(ListActions.updateListSuccess, (state, {list}) => ({
         ...state,
         ...list
+    })),
+
+    on(ListActions.updateListSuccess, (state, { list }) => ({
+        ...state,
+        lists: state.lists.map(l => l.id === list.id ? list : l)
+    })),
+
+    on(ListActions.updateListFailure, (state, { error }) => ({
+        ...state,
+        error
     }))
 );

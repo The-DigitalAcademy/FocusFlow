@@ -25,9 +25,12 @@ export class ListService {
   }
 
   //Update list
-  updateList(list: Lists): Observable<Lists>{
-    return this.httpClient.put<Lists>(this.url, list);
+  updateList(list: Lists) {
+  if (!list.id) {
+    throw new Error('List ID is required for update');
   }
+  return this.httpClient.put<Lists>(`${this.url}/${list.id}`, list);
+}
 
   //get a single list
   getSingleList(id: string): Observable<Lists>{

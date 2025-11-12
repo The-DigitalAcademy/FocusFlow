@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/reducers';
-import { selectSelectedList } from 'src/app/state/selectors/list.selectors';
+import { selectFilteredUserListsWithTasks, selectSelectedList } from 'src/app/state/selectors/list.selectors';
 import * as ListActions from '../../state/actions/list.actions';
 import { TaskService } from 'src/app/services/task.service';
 import { Tasks } from 'src/app/models/Tasks';
-import { flatMap, take } from 'rxjs/operators';
+import { flatMap, map, take } from 'rxjs/operators';
+import { Lists } from 'src/app/models/Lists';
 
 @Component({
   selector: 'app-list-detail',
@@ -19,46 +20,37 @@ export class ListDetailComponent implements OnInit {
   loading = true;
   listTitle = '';
   listId!: any;
+  currentList: Lists | null = null;
+  tasks$ = this.store.select(selectFilteredUserListsWithTasks).pipe(
+    map(lists => {
+      const selected = lists.find(l => l.id === this.listId);
+      return selected?.tasksID || [];
+    })
+  );
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
-    private taskService: TaskService
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
     this.listId = this.route.snapshot.paramMap.get('id')!;
     this.store.dispatch(ListActions.selectList({ listId: this.listId }));
 
-    this.list$.pipe(take(1)).subscribe(list => {
-      if (list && list.tasksID && list.tasksID.length > 0) {
-        this.loading = true;
-        this.tasks = [];
+    // Subscribe to enriched tasks
+    this.tasks$.subscribe(tasks => {
+      this.tasks = tasks as Tasks[];
+      this.loading = false;
+    });
 
-        const taskIds: number[] = list.tasksID.map((id: any) => 
-          typeof id === 'object' ? id.id : id
-        );
+    // Get title from selected list
+    this.list$.subscribe(list => {
+      if (list) {
+        this.currentList = list;
         this.listTitle = list.name;
-        taskIds.forEach(id => {
-          this.taskService.getTaskById(String(id)).subscribe({
-            next: (task: Tasks) => {
-              this.tasks.push(task);
-              console.log(this.tasks);
-            },
-            error: (err) => console.error(`Task ${id} failed:`, err),
-            complete: () => {
-              if (this.tasks.length === taskIds.length) {
-                this.loading = false;
-                
-              }
-            }
-          });
-        });
-      } else {
-        this.loading = false;
       }
     });
   }
-
+  
   selectedTaskId: number | null = null;
   showModal = false;
 

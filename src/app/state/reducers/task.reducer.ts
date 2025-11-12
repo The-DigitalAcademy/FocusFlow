@@ -10,5 +10,10 @@ export const taskReducer = createReducer<TaskState>(
     tasks,
     loading: false,
     error: null
+  })),
+
+  on(TaskActions.addTaskSuccess, (state, { task }) => ({
+    ...state,
+    tasks: [...state.tasks, task]
   }))
 );
