@@ -1,22 +1,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="container">
-    <div class="form-container">
+    <form class="form-container" [formGroup]="taskForm">
         <h1>LIST NAME</h1>
-        <input type="text" class="BLUE-INPUT" placeholder="Name">
-        <input type="text" class="BLUE-INPUT" placeholder="Catagory">
+        <input type="text" class="BLUE-INPUT" placeholder="Name" formControlName="listName">
+        <input type="text" class="BLUE-INPUT" placeholder="Catagory" formControlName="category">
         <div class="btn-add-list"> <button class="add-list-button">Add List</button></div>
 
         <input type="text" class="pink-input" placeholder="Name">
-        <input type="text" class="pink-input" placeholder="date">
+        <input type="date" class="pink-input" placeholder="date">
         <select class="pink-input" placeholder="Priority">
              <option>high</option>
              <option>medium</option>
              <option>low</option>
         </select>
         <div class="buttons">
-            <button class="add">Add</button>
-            <button class="cancel">cancel</button>
+            <button class="add"  (click)="onSubmit()">Add</button>
+            <button class="cancel" routerLink="/home" (click)="onCancel()">cancel</button>
         </div>
-    </div>
+    </form>
 </div>
 

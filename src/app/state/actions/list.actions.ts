@@ -63,3 +63,17 @@ export const updateTaskListFailure = createAction(
     props<{error:string}>()
 );
 
+export const createList = createAction(
+  '[Lists] Create Lists',
+  props<{ list: Lists}>()
+);
+
+export const createListsSuccess = createAction(
+    '[Lists] Create List Success',
+    props<{list: Lists}>()
+);
+
+export const createListsFailure = createAction(
+    '[Lists] Create List Failure',
+    props<{error: string}>()
+);
