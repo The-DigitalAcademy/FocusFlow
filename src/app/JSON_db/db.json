@@ -2499,9 +2499,9 @@
     },
     {
       "id": "212",
-      "name": "Meat bulk buy",
-      "dueDate": "15",
-      "importance": "High",
+      "name": "Meat bulk",
+      "dueDate": "2025-11-29",
+      "importance": "high",
       "isDone": false
     },
     {
@@ -2512,13 +2512,6 @@
       "isDone": false
     },
     {
-      "id": "214",
-      "name": "Cleaning supplies",
-      "dueDate": "25 every month",
-      "importance": "Low",
-      "isDone": false
-    },
-    {
       "id": "215",
       "name": "School snacks",
       "dueDate": "weekly",
@@ -2526,15 +2519,8 @@
       "isDone": true
     },
     {
-      "id": "216",
-      "name": "Lunchbox items",
-      "dueDate": "daily",
-      "importance": "Average",
-      "isDone": true
-    },
-    {
       "id": "217",
-      "name": "Margate chalet",
+      "name": "Margate chalett",
       "dueDate": "20-12-25",
       "importance": "Critical",
       "isDone": false
@@ -2551,20 +2537,6 @@
       "name": "Sun City",
       "dueDate": "30-12-25",
       "importance": "Average",
-      "isDone": false
-    },
-    {
-      "id": "220",
-      "name": "Drakensberg cabin",
-      "dueDate": "02-01-26",
-      "importance": "High",
-      "isDone": false
-    },
-    {
-      "id": "222",
-      "name": "Lego Star Wars",
-      "dueDate": "10-12-25",
-      "importance": "High",
       "isDone": false
     },
     {
@@ -2611,16 +2583,9 @@
     },
     {
       "id": "229",
-      "name": "R500 voucher",
+      "name": "R5000 voucher",
       "dueDate": "10-12-25",
       "importance": "High",
-      "isDone": false
-    },
-    {
-      "id": "230",
-      "name": "Funny gift",
-      "dueDate": "12-12-25",
-      "importance": "Average",
       "isDone": false
     },
     {
@@ -2747,13 +2712,6 @@
       "name": "Night Market",
       "dueDate": "2025-11-29",
       "importance": "medium",
-      "isDone": false
-    },
-    {
-      "id": "7714",
-      "name": "Gift for the boy",
-      "dueDate": "2025-12-04",
-      "importance": "high",
       "isDone": false
     },
     {

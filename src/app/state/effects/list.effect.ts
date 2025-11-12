@@ -53,27 +53,30 @@ export class ListEffects {
     )
   );
 
-  removeList$ = createEffect(() => 
-    this.actions$.pipe(
-        ofType(ListActions.removeList),
-        mergeMap(({list}) => 
-            this.listService.deleteList(list.id).pipe(
-                map(() => ListActions.removeListSuccess({list})),
-                catchError((err) => of(ListActions.removeListFailure({error: err})))
-            )
+    removeList$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(ListActions.removeList),
+            mergeMap(({list}) => 
+              this.listService.deleteList(list.id).pipe(
+                 map(() => ListActions.removeListSuccess({list})),
+                 catchError((err) => of(ListActions.removeListFailure({error: err})))
+             )
+         )
         )
     )
-)
 
-  createList$ = createEffect(() => 
-    this.actions$.pipe(
-      ofType(ListActions.createList),
-      mergeMap(({ list }) => 
-        this.listService.addList(list).pipe(
-          map((createdList) => ListActions.createListsSuccess({ list: createdList })),
-          catchError((err) => of(ListActions.createListsFailure({ error: err.message })))
+    updateList$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ListActions.updateTaskList),
+            withLatestFrom(this.store.select(selectSelectedList)),
+            mergeMap(([_, currentList]) => {
+                if (!currentList) return of();
+
+                return this.listService.updateList(currentList).pipe(
+                    map(() => ListActions.updateListSuccess({ list: currentList })),
+                    catchError(err => of(ListActions.updateListFailure({ error: err.message })))
+                );
+            })
         )
-      )
     )
-)
 }

@@ -1,86 +1,93 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Actions, ofType } from '@ngrx/effects';
+import { Subject, take, takeUntil } from 'rxjs';
+
+import * as TaskActions from '../../state/actions/task.actions';
+import * as ListActions from '../../state/actions/list.actions';
+import { selectTaskById } from '../../state/selectors/task.selector';
 import { Tasks } from 'src/app/models/Tasks';
-import { TaskService } from 'src/app/services/task.service';
+import { Lists } from 'src/app/models/Lists';
 
 @Component({
   selector: 'app-edit-task',
   templateUrl: './edit-task.component.html',
   styleUrls: ['./edit-task.component.css']
 })
-export class EditTaskComponent {
-  // Has the new task data on it.
-  addedTasks: Tasks[] = [];
+export class EditTaskComponent implements OnInit, OnDestroy {
+  @Input() isVisible = false;
+  @Input() editTaskId: number | null = null;  
+  @Output() editClose = new EventEmitter<void>();
+  
+  // Form fields – bound to the template
+  taskTitle = '';
+  taskDueDate = '';
+  taskPriority = '';
+  isDone = false;
 
-  // Form fields 
-  taskTitle: any = ''
-  taskDueDate: any = ''
-  taskPriority: any = ''
-
-
-  @Input() isVisible: boolean = false;
-  @Output() closeEdit = new EventEmitter<void>();
-  @Input() editTaskId: string | null = null;
-
-  // Updates the task array for both parent and child
-  @Input() addTaskArr: Tasks[] = []
-  @Output() addTaskArrChange = new EventEmitter<Tasks[]>();
-
-  @Input() done: boolean = false 
+  private destroy$ = new Subject<void>();
 
   constructor(
-    private taskService: TaskService,
-  ) { }
+    private store: Store,
+    private actions$: Actions
+  ) {}
 
-  ngOnInit() {
-    if (this.editTaskId !== null) {
-      const taskToEdit = this.addTaskArr.find(t => t.id === String(this.editTaskId));
-      if (taskToEdit) {
-        this.taskTitle = taskToEdit.name;
-        this.taskDueDate = taskToEdit.dueDate;
-        this.taskPriority = taskToEdit.importance;
-      }
-    } else {
-      // Add task input is empty when clicked 
-      this.taskTitle = '';
-      this.taskDueDate = '';
-      this.taskPriority = '';
+  ngOnInit(): void {
+    if (!this.editTaskId) {
+      this.resetForm();
+      return;
     }
+
+    this.store
+      .select(selectTaskById(String(this.editTaskId)))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(task => {
+        if (task) {
+          this.taskTitle = task.name;
+          this.taskDueDate = task.dueDate;
+          this.taskPriority = task.importance;
+          this.isDone = task.isDone;
+        }
+      });
   }
 
-  onClose() {
-    this.closeEdit.emit();
+  editTask(): void {
+    if (!this.editTaskId) return;
+
+    const updated: Tasks = {
+      id: String(this.editTaskId),
+      name: this.taskTitle,
+      dueDate: this.taskDueDate,
+      importance: this.taskPriority,
+      isDone: this.isDone
+    };
+
+    this.store.dispatch(TaskActions.updateTask({ task: updated }));
+
+    this.actions$
+    .pipe(
+      ofType(TaskActions.updateTaskSuccess, ListActions.updateListSuccess),
+      take(1),
+      takeUntil(this.destroy$)
+    )
+    .subscribe(() => this.onClose());
+  }
+
+  onClose(): void {
     this.isVisible = false;
-    
+    this.resetForm();
+    this.editClose.emit();
   }
 
-  editTask() {
-  const updateTask: Tasks = {
-    id: String(this.editTaskId),
-    name: this.taskTitle,
-    dueDate: this.taskDueDate,
-    importance: this.taskPriority,
-    isDone: this.done
-  };
+  private resetForm(): void {
+    this.taskTitle = '';
+    this.taskDueDate = '';
+    this.taskPriority = '';
+    this.isDone = false;
+  }
 
-  this.taskService.updateTask(updateTask).subscribe({
-    next: (editedTask) => {
-      const index = this.addTaskArr.findIndex(t => t.id === editedTask.id);
-      if (index !== -1) {
-        this.addTaskArr[index] = editedTask;
-      }
-
-      // Emit the updated array to the parent
-      this.addTaskArrChange.emit(this.addTaskArr);
-
-      // Tell parent to close the modal
-      this.closeEdit.emit();
-
-      console.log('Updated task array:', this.addTaskArr);
-      alert('Updated Successfully');
-    },
-    error: (err) => {
-      console.error('Error updating task:', err);
-      alert('Failed to update task');
-    }
-  });
-  }}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}

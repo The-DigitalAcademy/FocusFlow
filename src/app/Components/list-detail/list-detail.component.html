@@ -20,13 +20,13 @@
                   task.importance === 'medium' ? 'orange' : 'green'
             }" ></div>
             <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" (click)="editTask(task.id, task.isDone)">
-            <img src="../../../assets/material-symbols_delete.svg" class="delete-button" >
+            <img src="../../../assets/material-symbols_delete.svg" (click)="deleteTask(task.id)" class="delete-button" >
             </div> 
         </div>
 
     </div>
-     <app-add-task *ngIf="showModal" [isVisible]="showModal" [currentList]="currentList" (close)="onClose()"></app-add-task>
- 
+     <app-add-task *ngIf="showModal" [isVisible]="showModal" [currentList]="currentList" (close)="onClose()" [editTaskId]="selectedTaskId"></app-add-task>
+    <app-edit-task *ngIf="showEditModal" [isVisible]="showEditModal" [editTaskId]="selectedTaskId" (editClose)="onClose()"/>
 
     <ng-template #noTasks>
         <p class="no-tasks-message">No tasks available. Please add a task.</p>
