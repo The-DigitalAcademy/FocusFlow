@@ -93,7 +93,6 @@ export const selectFilteredUserListsWithTasks = createSelector(
         if (fullTask) {
           validEnrichedTasks.push(fullTask);
         }
-        // Invalid/missing task → silently removed
       });
 
       return { ...list, tasksID: validEnrichedTasks };
