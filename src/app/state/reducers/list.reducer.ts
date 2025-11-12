@@ -33,11 +33,6 @@ export const listReducer = createReducer<ListState>(
         filter: category
     })),
 
-    on(ListActions.updateListSuccess, (state, {list}) => ({
-        ...state,
-        ...list
-    })),
-
     on(ListActions.updateListSuccess, (state, { list }) => ({
         ...state,
         lists: state.lists.map(l => l.id === list.id ? list : l)
@@ -46,5 +41,22 @@ export const listReducer = createReducer<ListState>(
     on(ListActions.updateListFailure, (state, { error }) => ({
         ...state,
         error
+    })),
+
+    on(ListActions.removeList, (state) => ({
+        ...state,
+        loading: true
+    })),
+
+    on(ListActions.removeListFailure, (state, {error}) => ({
+        ...state,
+        error,
+        loading: false
+    })),
+
+    on(ListActions.removeListSuccess, (state, {list}) => ({
+        ...state,
+        lists: state.lists.filter(l => l.id !== list.id),
+        loading: false
     }))
 );

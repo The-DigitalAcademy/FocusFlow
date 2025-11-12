@@ -1,4 +1,3 @@
-import { Import } from './../../node_modules/@angular/compiler-cli/src/ngtsc/reflection/src/host.d';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +15,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { LandingPageComponent } from './Components/landing-page/landing-page.component';
+import { EditTaskComponent } from './Components/edit-task/edit-task.component';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { ListEffects } from './state/effects/list.effect';
@@ -37,7 +37,8 @@ import { TaskEffects } from './state/effects/task.effect';
     HomeComponent,
     NavBarComponent,
     SidebarComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    EditTaskComponent
   ],
   imports: [
     StoreModule.forRoot(reducers),

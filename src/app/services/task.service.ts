@@ -29,7 +29,7 @@ export class TaskService {
 
   //Update task
   updateTask(task: Tasks): Observable<Tasks>{
-    return this.httpClient.put<Tasks>(this.url, task);
+    return this.httpClient.put<Tasks>(`${this.url}/${task.id}`, task);
   }
 
   //Delete task

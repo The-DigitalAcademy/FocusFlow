@@ -15,5 +15,22 @@ export const taskReducer = createReducer<TaskState>(
   on(TaskActions.addTaskSuccess, (state, { task }) => ({
     ...state,
     tasks: [...state.tasks, task]
+  })),
+
+  on(TaskActions.removeTask, (state) => ({
+    ...state,
+    loading: true
+  })),
+
+  on(TaskActions.removeTaskSuccess, (state, {task}) => ({
+    ...state,
+    loading: false,
+    tasks: state.tasks.filter(t => t.id !== task.id)
+  })),
+
+  on(TaskActions.removeTaskFailure, (state, {error}) => ({
+    ...state,
+    loading: false,
+    error
   }))
 );

@@ -1,3 +1,4 @@
+import { removeList } from './../actions/list.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ListService } from 'src/app/services/list.service';
@@ -51,4 +52,16 @@ export class ListEffects {
       })
     )
   );
+
+  removeList$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(ListActions.removeList),
+        mergeMap(({list}) => 
+            this.listService.deleteList(list.id).pipe(
+                map(() => ListActions.removeListSuccess({list})),
+                catchError((err) => of(ListActions.removeListFailure({error: err})))
+            )
+        )
+    )
+)
 }

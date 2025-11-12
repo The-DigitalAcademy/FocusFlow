@@ -32,4 +32,18 @@ export class TaskEffects {
       )
     )
   );
+
+  removeTask$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(TaskActions.removeTask),
+        mergeMap(({task}) => 
+            this.taskService.deleteTask(task.id).pipe(
+                map(() => TaskActions.removeTaskSuccess({task})),
+                catchError(err => of(TaskActions.removeTaskFailure({error: err})))
+            )
+        )
+    )
+    );
+
+
 }

@@ -32,3 +32,18 @@ export const updateListFailure = createAction(
     '[List API] Update List Failure',
     props<{error: string}>()
 );
+
+export const removeList = createAction(
+  '[List] Remove List',
+  props<{list: Lists}>()
+);
+
+export const removeListSuccess = createAction(
+  '[List API] Remove List Success',
+  props<{list: Lists}>()
+);
+
+export const removeListFailure = createAction(
+  '[List API] Remove List Failure',
+  props<{error: string}>()
+);

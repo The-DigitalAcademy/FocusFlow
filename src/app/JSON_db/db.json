@@ -2498,13 +2498,6 @@
       "isDone": true
     },
     {
-      "id": "211",
-      "name": "Monthly groceries R5000",
-      "dueDate": "01",
-      "importance": "Critical",
-      "isDone": true
-    },
-    {
       "id": "212",
       "name": "Meat bulk buy",
       "dueDate": "15",
@@ -2782,13 +2775,6 @@
       "name": "Oil Change",
       "dueDate": "2025-11-27",
       "importance": "high",
-      "isDone": false
-    },
-    {
-      "id": "90a9",
-      "name": "buy washing powder",
-      "dueDate": "",
-      "importance": "",
       "isDone": false
     }
   ]

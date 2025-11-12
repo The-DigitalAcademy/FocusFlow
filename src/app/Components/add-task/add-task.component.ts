@@ -2,10 +2,11 @@ import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core
 import { Store } from '@ngrx/store';
 import * as TaskActions from '../../state/actions/task.actions'
 import * as ListActions from '../../state/actions/list.actions'
-import { Tasks } from '../../models/Tasks';
-import { Lists } from '../../models/Lists';
 import { Actions, ofType } from '@ngrx/effects';
 import { Subject, take, takeUntil } from 'rxjs';
+import { Tasks } from 'src/app/models/Tasks';
+import { Lists } from 'src/app/models/Lists';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-add-task',
@@ -23,11 +24,14 @@ export class AddTaskComponent implements OnDestroy{
   taskPriority = '';
   
   private destroy$ = new Subject<void>();
+
   constructor(
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
+    private taskService: TaskService
   ) {}
 
+  
   onClose() {
     this.close.emit();
     this.isVisible = false;
@@ -65,5 +69,33 @@ export class AddTaskComponent implements OnDestroy{
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+      
+
+  deleteTask(id: string) {
+    this.taskService.getTaskById(id).subscribe({
+      next: response => {
+        //get the task and remove it
+        this.store.dispatch(TaskActions.removeTask({task: response}));
+        //update the state
+        this.actions$.pipe(
+          ofType(TaskActions.removeTaskSuccess),
+          take(1),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
+          console.log("Removed successfully");
+          this.onClose();
+        })
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+    
+  }
+
+  showInputValues() {
+    this.editTaskId
   }
 }

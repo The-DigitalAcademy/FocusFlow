@@ -12,11 +12,15 @@
         <!-- Div for each task-->
         <div class="task" *ngFor="let task of tasks; let i = index;"> 
             <div class="task-header-div">
-                <h1 class="task-header">{{task.name}}</h1>
+                <h1 class="task-header" [ngStyle]="{'text-decoration': task.isDone? 'line-through' : 'none'}" (click)="isComplete(i)">{{task.name}}</h1>
             </div>
             <div class="task-settings">
-            <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" (click)="editTask(task.id)">
-            <img src="../../../assets/material-symbols_delete.svg" class="delete-button">
+            <div class="importance" [ngStyle]="{
+                 'background-color': task.importance === 'high' ? 'red' :
+                  task.importance === 'medium' ? 'orange' : 'green'
+            }" ></div>
+            <img src="../../../assets/flowbite_edit-solid.svg" class="edit-button" (click)="editTask(task.id, task.isDone)">
+            <img src="../../../assets/material-symbols_delete.svg" class="delete-button" (click)="deleteTask(task.id)">
             </div> 
         </div>
 
