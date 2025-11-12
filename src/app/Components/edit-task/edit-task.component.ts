@@ -16,7 +16,7 @@ import { Lists } from 'src/app/models/Lists';
 })
 export class EditTaskComponent implements OnInit, OnDestroy {
   @Input() isVisible = false;
-  @Input() editTaskId: number | null = null;  
+  @Input() editTaskId: string | null = null;  
   @Output() editClose = new EventEmitter<void>();
   
   // Form fields – bound to the template

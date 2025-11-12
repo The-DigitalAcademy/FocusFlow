@@ -12,7 +12,10 @@
         <!-- Div for each task-->
         <div class="task" *ngFor="let task of tasks; let i = index;"> 
             <div class="task-header-div">
-                <h1 class="task-header" [ngStyle]="{'text-decoration': task.isDone? 'line-through' : 'none'}" (click)="isComplete(i)">{{task.name}}</h1>
+                <h1 class="task-header" 
+                [ngStyle]="{'text-decoration': task.isDone? 'line-through' : 'none'}" 
+                (click)="isComplete(i)">
+                {{task.name}}</h1>
             </div>
             <div class="task-settings">
             <div class="importance" [ngStyle]="{
@@ -26,7 +29,7 @@
 
     </div>
      <app-add-task *ngIf="showModal" [isVisible]="showModal" [currentList]="currentList" (close)="onClose()" [editTaskId]="selectedTaskId"></app-add-task>
-    <app-edit-task *ngIf="showEditModal" [isVisible]="showEditModal" [editTaskId]="selectedTaskId" (editClose)="onClose()"/>
+     <app-edit-task *ngIf="showEditModal" [isVisible]="showEditModal" [editTaskId]="selectedTaskId" (editClose)="onClose()"/>
 
     <ng-template #noTasks>
         <p class="no-tasks-message">No tasks available. Please add a task.</p>
