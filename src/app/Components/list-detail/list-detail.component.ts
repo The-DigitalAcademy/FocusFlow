@@ -63,7 +63,7 @@ export class ListDetailComponent implements OnInit, OnDestroy {
     });
   }
   
-  selectedTaskId: string | null = null;
+  selectedTaskId: number | null = null;
   showModal = false;
    addTaskArr = this.tasks
    selectedTaskIsDone: boolean = false

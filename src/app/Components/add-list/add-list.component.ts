@@ -3,6 +3,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as ListActions from '../../state/actions/list.actions'
 import { Lists } from '../../models/Lists'
+import { selectCurrentUser } from 'src/app/state/selectors/user.selectors';
+import { take, withLatestFrom } from 'rxjs';
+import { Users } from 'src/app/models/Users';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,17 +16,11 @@ import { Lists } from '../../models/Lists'
 })
 export class AddListComponent {
   taskForm: FormGroup;
-
-  constructor(private fb: FormBuilder, private store: Store) {
+  
+  constructor(private fb: FormBuilder, private store: Store, private router: Router) {
     this.taskForm = this.fb.group({
       listName: ['', Validators.required],
-      tasks: this.fb.array([
-        this.fb.control('', Validators.required),
-        this.fb.control('', Validators.required),
-        this.fb.control('', Validators.required),
-        this.fb.control('', Validators.required),
-        this.fb.control('', Validators.required)
-      ])
+      category: ['', Validators.required],
     });
   }
 
@@ -30,25 +28,30 @@ export class AddListComponent {
     return this.taskForm.get('tasks') as FormArray;
   }
 
-  onSubmit() {
+  user!: Users;
 
-  const newList: Lists = {
-    id: '2', 
-    name: this.taskForm.value.listName,
-    category: 'Default', 
-    userId: '123', 
-    tasksID: this.taskForm.value.tasks.map((task: string, index: number) => ({
-      id: '2',
-      title: task,
-      completed: false
-    }))
-  };
+onSubmit() {
+  this.store.select(selectCurrentUser).pipe(take(1)).subscribe(u => {
+    if (!u) {
+      alert('No user is currently selected.');
+      return;
+    }
+    this.user = u;
 
-  this.store.dispatch(ListActions.createListsSuccess({ list : newList }));
+    const newList: Lists = {
+      id: crypto.randomUUID(),
+      name: this.taskForm.value.listName,
+      category: this.taskForm.value.category, 
+      userId: this.user.id, 
+      tasksID: []
+    };
 
-  console.log('Dispatched list:', newList);
-  alert('Tasks added successfully!');
-  this.taskForm.reset();
+    this.store.dispatch(ListActions.createList({ list : newList }));
+
+    console.log('Dispatched list:', newList);
+    alert('List created successfully!');
+    this.router.navigate(['/home']);
+  });
 }
 
   onCancel() {
