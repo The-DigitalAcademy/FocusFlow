@@ -77,7 +77,7 @@ export class ListDetailComponent implements OnInit {
 
   }
 
-   deleteTask(id: number) {
+   deleteTask(id: string) {
     this.taskService.deleteTask(id).subscribe({
       next: () => {
         // Remove the deleted task from the tasks array

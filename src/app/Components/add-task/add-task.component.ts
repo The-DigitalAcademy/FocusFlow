@@ -22,7 +22,7 @@ export class AddTaskComponent {
   newTask!: Omit<Tasks, "id">;
   @Input() isVisible: boolean = false;
   @Output() close = new EventEmitter<void>();
-  @Input() editTaskId: number | null = null;
+  @Input() editTaskId: String | null = null;
   @Input() listId: String | null = null;
   @Input() currentList!: Lists;
 
@@ -34,6 +34,7 @@ export class AddTaskComponent {
 
   constructor(
     private taskService: TaskService,
+    private listService: ListService
   ) { }
 
   ngOnInit() {
@@ -51,10 +52,7 @@ export class AddTaskComponent {
       this.taskPriority = '';
     }
   }
-  constructor(
-    private taskService: TaskService,
-    private listService: ListService
-  ){}
+  
   onClose() {
     this.close.emit();
     this.isVisible = false;
@@ -104,6 +102,15 @@ export class AddTaskComponent {
       alert('Could not create task – try again.');
     }
   });
+}
+
+  deleteTask(id: string) {
+    this.taskService.deleteTask(id).subscribe({
+      next: () => {
+        // Remove the deleted task from the tasks array
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      }
+    });
 }
 
 showInputValues() {
