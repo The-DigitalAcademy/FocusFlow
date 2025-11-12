@@ -16,7 +16,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class AddTaskComponent implements OnDestroy{
   @Input() isVisible = false;
   @Output() close = new EventEmitter<void>();
-  @Input() editTaskId: number | null = null;
+  @Input() editTaskId: string | null = null;
   @Input() currentList: Lists | null = null;
 
   taskTitle = '';

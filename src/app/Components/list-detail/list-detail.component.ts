@@ -75,7 +75,7 @@ export class ListDetailComponent implements OnInit, OnDestroy {
   }
 
   editTask(id: string, isDone: boolean) {
-    this.selectedTaskId = Number(id);
+    this.selectedTaskId = id;
     this.selectedTaskIsDone = isDone
     this.showEditModal = true;
 
@@ -97,7 +97,9 @@ export class ListDetailComponent implements OnInit, OnDestroy {
   }
 
   isComplete(index: number) {
-    this.tasks[index].isDone = !this.tasks[index].isDone;
+    const task = { ...this.tasks[index] };
+    console.log('Clicked index:', index);
+    task.isDone = !task.isDone;
   }
 
 }
