@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, tap } from "rxjs/operators";
@@ -10,7 +11,8 @@ export class UserEffects{
 
     constructor(
         private actions: Actions,
-        private userService: UserService
+        private userService: UserService,
+        private router: Router
     ){}
 
     login = createEffect(() =>
@@ -19,7 +21,8 @@ export class UserEffects{
         mergeMap(({ email, password }) =>
             this.userService.login(email, password).pipe(
             map(user => {
-                this.userService.setCurrentUser(user);       
+                this.userService.setCurrentUser(user); 
+                this.router.navigate(['/home']);      
                 return UserActions.loginSuccess({ user });
             }),
             catchError(error => of(UserActions.loginFailure({ error: error.message })))

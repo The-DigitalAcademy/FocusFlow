@@ -168,6 +168,20 @@
       "surname": "One",
       "email": "bites@the.dust",
       "password": "pass"
+    },
+    {
+      "id": "e19a",
+      "name": "Sheryl",
+      "surname": "Cat",
+      "email": "s.c@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "0224",
+      "name": "Vusi",
+      "surname": "Ndaba",
+      "email": "vusi@gmail.com",
+      "password": "pass"
     }
   ],
   "lists": [
@@ -1050,6 +1064,43 @@
           "name": "Wash the dishes ",
           "dueDate": "",
           "importance": "",
+          "isDone": false
+        }
+      ]
+    },
+    {
+      "id": "ef619274-eb49-43e6-a85b-6b9f3960f107",
+      "name": "Gym",
+      "category": "",
+      "userId": "10",
+      "tasksID": [
+        {
+          "id": "0f1b",
+          "name": "Do 20 push-ups",
+          "dueDate": "",
+          "importance": "high",
+          "isDone": false
+        }
+      ]
+    },
+    {
+      "id": "ebefd4a8-8e47-4c6f-a976-69eb995e4926",
+      "name": "Grocery",
+      "category": "Shopping",
+      "userId": "0224",
+      "tasksID": [
+        {
+          "id": "0210",
+          "name": "buy washing powder",
+          "dueDate": "2025-11-14",
+          "importance": "high",
+          "isDone": false
+        },
+        {
+          "id": "0b51",
+          "name": "buy milk",
+          "dueDate": "2025-11-21",
+          "importance": "high",
           "isDone": false
         }
       ]
@@ -2562,13 +2613,6 @@
       "isDone": true
     },
     {
-      "id": "217",
-      "name": "Margate chalet",
-      "dueDate": "20-12-25",
-      "importance": "Critical",
-      "isDone": false
-    },
-    {
       "id": "218",
       "name": "Durban beach house",
       "dueDate": "26-12-25",
@@ -2796,7 +2840,7 @@
       "id": "7714",
       "name": "Gift for the boy",
       "dueDate": "2025-12-04",
-      "importance": "high",
+      "importance": "medium",
       "isDone": false
     },
     {
@@ -2811,6 +2855,20 @@
       "name": "Wash clothes with soap",
       "dueDate": "",
       "importance": "",
+      "isDone": false
+    },
+    {
+      "id": "0210",
+      "name": "buy baby powder",
+      "dueDate": "2025-11-27",
+      "importance": "low",
+      "isDone": false
+    },
+    {
+      "id": "0b51",
+      "name": "buy milk",
+      "dueDate": "2025-11-21",
+      "importance": "low",
       "isDone": false
     }
   ]

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     
     this.store.dispatch(UserActions.login({email: this.loginForm.value.email!, password: this.loginForm.value.password!}))
-
+    
   }
   register(){
     this.router.navigate(['/register']);
